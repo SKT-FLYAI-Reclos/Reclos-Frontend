@@ -5,11 +5,22 @@ import AppLayout from '@/components/layouts/appLayout';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import CreateCorrectedImgPage from '@/components/sell/CreateCorrectedImgPage';
+import { TSellForm } from '@/types/sellFormType';
 
-export default function CellPage() {
+const initialSellForm: TSellForm = {
+  sex: 'both',
+  size: 'l',
+  title: null,
+  description: null,
+  price: null,
+  correctedClothImg: null,
+};
+
+export default function SellPage() {
   const router = useRouter();
   const [page, setPage] = useState(0);
-  const [correctedClothImg, setCorrectedClothImg] = useState<File | null>(null);
+  const [selectedClothImg, setSelectedClothImg] = useState<File | null>(null);
+  const [sellForm, setSellForm] = useState<TSellForm>(initialSellForm);
   function handleToPrev() {
     if (page === 0) {
       router.back();
@@ -26,16 +37,18 @@ export default function CellPage() {
         <SelectPhoto
           toPrev={handleToPrev}
           toNext={handleToNext}
-          correctedClothImg={correctedClothImg}
-          setCorrectedClothImg={setCorrectedClothImg}
+          selectedClothImg={selectedClothImg}
+          setSelectedClothImg={setSelectedClothImg}
         />
       )}
       {page === 1 && (
         <CreateCorrectedImgPage
           toPrev={handleToPrev}
           toNext={handleToNext}
-          correctedClothImg={correctedClothImg}
-          setCorrectedClothImg={setCorrectedClothImg}
+          selectedClothImg={selectedClothImg!}
+          setSelectedClothImg={setSelectedClothImg}
+          sellForm={sellForm}
+          setSellForm={setSellForm}
         />
       )}
     </AppLayout>
