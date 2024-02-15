@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Auth from '@/components/Auth';
 import QueryProvider from '@/components/queryProvider';
+import Recoil from '@/components/recoil';
 
 export default function RootLayout({
   children,
@@ -9,9 +10,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryProvider>
-      <Auth>{children}</Auth>
-    </QueryProvider>
+    // <RecoilRoot>
+    <Recoil>
+      <QueryProvider>
+        <Auth>{children}</Auth>
+      </QueryProvider>
+    </Recoil>
+    // </RecoilRoot>
   );
 }
 
