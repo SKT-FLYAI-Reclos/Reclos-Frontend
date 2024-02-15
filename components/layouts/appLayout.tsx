@@ -1,3 +1,4 @@
+import AppInstallPrompt from '../appInstallPrompt/appInstallPrompt';
 import AlertView from '../modal/alertView';
 import BottomNavbar from '../navbar/bottomNavbar';
 
@@ -8,6 +9,7 @@ export default function AppLayout({ showBNB = true, children }: { showBNB?: bool
         {children}
         {showBNB && <BottomNavbar />}
         <AlertView />
+        <AppInstallPrompt />
       </body>
     </html>
   );
