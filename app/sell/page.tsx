@@ -1,9 +1,10 @@
 'use client';
 
-import SelectPhoto from '@/components/sell/selectPhoto';
+import SelectPhoto from '@/components/sell/selectPhotoPage';
 import AppLayout from '@/components/layouts/appLayout';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import CreateCorrectedImgPage from '@/components/sell/CreateCorrectedImgPage';
 
 export default function CellPage() {
   const router = useRouter();
@@ -25,7 +26,15 @@ export default function CellPage() {
         <SelectPhoto
           toPrev={handleToPrev}
           toNext={handleToNext}
-          correctClothImg={correctedClothImg}
+          correctedClothImg={correctedClothImg}
+          setCorrectedClothImg={setCorrectedClothImg}
+        />
+      )}
+      {page === 1 && (
+        <CreateCorrectedImgPage
+          toPrev={handleToPrev}
+          toNext={handleToNext}
+          correctedClothImg={correctedClothImg}
           setCorrectedClothImg={setCorrectedClothImg}
         />
       )}

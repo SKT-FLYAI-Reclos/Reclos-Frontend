@@ -29,6 +29,14 @@ const config: Config = {
       fontFamily: {
         spoqa: ['Spoqa Han Sans', 'sans-serif'],
       },
+      zIndex: {
+        topnav: '999',
+        backdrop: '1000',
+        modalview: '1001',
+      },
+      colors: {
+        backdrop: 'rgba(0,0,0,0.7)',
+      },
     },
   },
   plugins: [],
