@@ -1,6 +1,6 @@
 'use client';
 
-import SelectPhoto from '@/components/cell/selectPhoto';
+import SelectPhoto from '@/components/sell/selectPhoto';
 import AppLayout from '@/components/layouts/appLayout';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
