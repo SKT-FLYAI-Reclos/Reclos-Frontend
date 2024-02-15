@@ -35,18 +35,25 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   icons: {
     other: [
+      { url: '/logo/favicon.ico', rel: 'icon', type: 'image/x-icon' },
+      { url: '/logo/favicon-16x16.png', rel: 'icon', type: 'image/png', sizes: '16x16' },
+      { url: '/logo/favicon-32x32.png', rel: 'icon', type: 'image/png', sizes: '32x32' },
+      { url: 'logo/apple-touch-icon.png', rel: 'apple-touch-icon', sizes: '180x180' },
+      { url: 'logo/android-chrome-192x192.png', rel: 'icon', type: 'image/png', sizes: '192x192' },
+      { url: 'logo/android-chrome-512x512.png', rel: 'icon', type: 'image/png', sizes: '512x512' },
+
       {
-        url: '/icons/logo-192x192.png',
+        url: '/logo/basic-192x192.png',
         media: '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
         rel: 'apple-touch-startup-image',
       },
       {
-        url: '/icons/logo-384x384.png',
+        url: '/logo/basic-384x384.png',
         media: '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
         rel: 'apple-touch-startup-image',
       },
       {
-        url: '/icons/logo-512x512.png',
+        url: '/logo/basic-512x512.png',
         media: '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
         rel: 'apple-touch-startup-image',
       },
