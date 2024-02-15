@@ -9,13 +9,13 @@ import useAlert from '@/recoil/alert/useAlert';
 export default function SelectPhoto({
   toPrev,
   toNext,
-  correctedClothImg,
-  setCorrectedClothImg,
+  selectedClothImg: correctedClothImg,
+  setSelectedClothImg: setCorrectedClothImg,
 }: {
   toPrev: () => void;
   toNext: () => void;
-  correctedClothImg: File | null;
-  setCorrectedClothImg: (img: File) => void;
+  selectedClothImg: File | null;
+  setSelectedClothImg: (img: File) => void;
 }) {
   const { showAlert } = useAlert();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,7 +39,7 @@ export default function SelectPhoto({
   }
   return (
     <>
-      <TopNavbar left={<PrevBtn title='Back' onClick={handleToPrev} />} />
+      <TopNavbar left={<PrevBtn title='Back' onClick={handleToPrev} />} title='옷 선택하기' />
       {!correctedClothImg ? (
         <BeforeSelectPhoto selectPhoto={selectPhoto} />
       ) : (
@@ -86,15 +86,7 @@ function AfterSelectPhoto({
   return (
     <main className='flex flex-col items-center h-[calc(100vh-64px)]'>
       <div className='overflow-hidden w-screen h-[100vw] relative shrink-0'>
-        <Image
-          src={URL.createObjectURL(correctedClothImg)}
-          alt='선택한 옷 이미지'
-          // width={0}
-          // height={0}
-          // style={{ width: '100%', height: '100%' }}
-          fill
-          objectFit='cover'
-        />
+        <Image src={URL.createObjectURL(correctedClothImg)} alt='선택한 옷 이미지' fill objectFit='cover' />
       </div>
       <div className='w-full h-full flex flex-col items-center justify-center gap-10'>
         <button
