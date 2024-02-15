@@ -27,3 +27,12 @@ body {
     text-wrap: balance;
   }
 }
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  all: unset;
+  outline: none;
+}
