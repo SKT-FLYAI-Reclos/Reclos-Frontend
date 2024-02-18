@@ -21,7 +21,7 @@ const slides = [
 ];
 
 const mainBannerSettings: Settings = {
-  dots: true,
+  dots: false,
   arrows: false,
   infinite: true,
   speed: 500,
