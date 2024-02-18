@@ -11,7 +11,7 @@ import cls from '@/libs/cls';
 export default function BottomNavbar() {
   const pathname = usePathname();
   return (
-    <nav className='fixed bottom-0 w-full h-70 border-t-1 border-t-gray-300 flex justify-center items-center gap-20'>
+    <nav className='fixed bottom-0 w-full h-70 bg-white border-t-1 border-t-gray-300 flex justify-center items-center gap-20'>
       {navItems.map((navItem) => (
         <NavItem
           key={navItem.text}
