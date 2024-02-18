@@ -3,6 +3,12 @@ import { PHASE_DEVELOPMENT_SERVER, PHASE_PRODUCTION_BUILD } from 'next/constants
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  images: {
+    // 'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/*'
+    remotePatterns: [
+      { protocol: 'https', hostname: 'reclosbucket.s3.ap-northeast-2.amazonaws.com', port: '', pathname: '/**/*' },
+    ],
+  },
 
   // svg 사용할 때 <Icon /> 처럼 사용하기 위함
   webpack: (config) => {
