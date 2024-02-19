@@ -15,7 +15,7 @@ export default function AppInstallPrompt() {
   function handleBeforeInstallPrompt(e: TBeforeInstallPromptEvent) {
     e.preventDefault();
     // setAndroidInstallPromptEvent(e);
-    alert('handleBeforeInstallPrompt');
+    // alert('handleBeforeInstallPrompt');
     e.prompt();
   }
   useEffect(() => {
