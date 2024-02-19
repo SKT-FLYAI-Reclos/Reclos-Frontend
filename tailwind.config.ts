@@ -36,6 +36,7 @@ const config: Config = {
       },
       colors: {
         backdrop: 'rgba(0,0,0,0.7)',
+        'gray-light': '#F0F0F5',
       },
     },
   },
