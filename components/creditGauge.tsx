@@ -1,0 +1,10 @@
+import cls from '@/libs/cls';
+import { HTMLAttributes } from 'react';
+
+export default function CreditGauge({ ...props }: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={cls('rounded-4 bg-gray-light overflow-hidden', props.className ?? '')}>
+      <div style={{ width: `${100 - 60}%` }} className='bg-green-500 h-full mb-20'></div>
+    </div>
+  );
+}

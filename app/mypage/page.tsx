@@ -7,6 +7,7 @@ import Link from 'next/link';
 import WaterDropIcon from '@/components/icons/waterDropIcon';
 import LevelChart from '@/components/pages/mypage/levelChart';
 import TreeIcon from '@/components/icons/treeIcon';
+import CreditGauge from '@/components/creditGauge';
 
 export default function MyPage() {
   return (
@@ -30,9 +31,7 @@ export default function MyPage() {
         <div className='flex justify-end mb-10'>
           <span className='text-12 text-gray-400'>Lv.1 승급까지 - 60</span>
         </div>
-        <div className='w-full h-20 rounded-4 bg-gray-light overflow-hidden mb-20'>
-          <div style={{ width: `${100 - 60}%` }} className='bg-green-500 h-full mb-20'></div>
-        </div>
+        <CreditGauge className='w-full h-20 mb-20' />
         <div className='flex items-center justify-between'>
           {/* 물 레벨 */}
           <div className=''>
