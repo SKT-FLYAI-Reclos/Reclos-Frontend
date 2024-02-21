@@ -1,4 +1,4 @@
-import Hr from '@/components/hr';
+import Hr from '@/components/utils/hr';
 import AppLayout from '@/components/layouts/appLayout';
 import Logo from '@/components/logo';
 import TopNavbar from '@/components/navbar/topNavbar';

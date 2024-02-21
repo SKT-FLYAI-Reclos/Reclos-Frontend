@@ -49,7 +49,7 @@ async function Board({ id }: { id: number }) {
             <HeartIcon color='#22C55E' width='30' height='27' />
           </button>
           <Link
-            href={`/cody?`}
+            href={`/cody?images=${board.images.map((img) => img.image).join(',')}`}
             className=' grow py-12 bg-green-500 border-2 border-solid border-green-500 flex justify-center items-center text-white font-semibold text-18 rounded-8'
           >
             코디 생성하기

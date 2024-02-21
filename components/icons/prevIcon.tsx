@@ -2,6 +2,6 @@
 
 import Prev from '../../public/icons/back.svg';
 
-export default function PrevIcon() {
-  return <Prev />;
+export default function PrevIcon({ ...prev }) {
+  return <Prev {...prev} />;
 }
