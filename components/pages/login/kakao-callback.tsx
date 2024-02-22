@@ -4,6 +4,7 @@ import { kakaoLogin } from '@/apis/loginApi';
 import { user } from '@/class/user';
 import AppLayout from '@/components/layouts/appLayout';
 import QUERY_KEYS from '@/constants/queryKeys';
+import { KAKAO_REDIRECT_URI_DEPLOY, KAKAO_REDIRECT_URI_DEVELOPMENT } from '@/constants/redirectUri';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
@@ -15,10 +16,13 @@ export default function KakaoCallback() {
 
   const code = searchParams.get('code') as string;
   useEffect(() => {
-    return;
     (async () => {
       try {
-        const response = await kakaoLogin(code); // 서버에 로그인 요청
+        // 서버에 로그인 요청
+        const response = await kakaoLogin(
+          code,
+          process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY
+        );
         if (response.status === 200) {
           queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GET_USER] });
           const {

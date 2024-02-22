@@ -5,9 +5,17 @@ import PrevBtn from '@/components/navbar/prevBtn';
 import TopNavbar from '@/components/navbar/topNavbar';
 import ModelImgsBanner from '@/components/pages/cody/modelImgsBanner';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
-export default function Cody() {
+export default function CodyWrapper() {
+  return (
+    <Suspense>
+      <Cody />
+    </Suspense>
+  );
+}
+
+function Cody() {
   const searchParams = useSearchParams();
   const [modelImgs, setModelImgs] = useState<string[]>(searchParams.get('images')?.split(',') || []);
   const [currentModelImgIdx, setCurrentModelImgIdx] = useState(0);

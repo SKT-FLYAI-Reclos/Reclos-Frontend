@@ -63,7 +63,7 @@ function CreateCorrectedImg({
         </div>
         <section className='flex flex-col items-center mx-auto h-full'>
           <div>
-            <div className='mb-10 text-16 text-green-500 font-semibold'>성별</div>
+            <div className='mb-10 text-16 text-indigo-600 font-semibold'>성별</div>
             <SelectionBox
               value={sellForm.sex}
               options={selectionBoxOptions}
@@ -71,7 +71,7 @@ function CreateCorrectedImg({
             />
           </div>
           <div className='w-full h-full flex justify-center items-center'>
-            <button className=' bg-green-500 rounded-4 text-16 text-white w-full py-10 flex justify-center items-center'>
+            <button className=' bg-indigo-600 rounded-4 text-16 text-white w-full py-10 flex justify-center items-center'>
               피팅 모델 생성하기
             </button>
           </div>
@@ -82,5 +82,5 @@ function CreateCorrectedImg({
 }
 
 const Loading = (
-  <div className='w-screen h-screen flex justify-center items-center text-green-500'>옷 판매 사진 생성 중...</div>
+  <div className='w-screen h-screen flex justify-center items-center text-indigo-600'>옷 판매 사진 생성 중...</div>
 );

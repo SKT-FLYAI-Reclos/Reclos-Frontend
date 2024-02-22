@@ -17,7 +17,7 @@ export default function Closet() {
       <AddBtn />
       <main className='pt-30 px-20'>
         <span className='block mb-10 text-16 font-medium'>상의</span>
-        <Hr className='border-green-500 mb-20' />
+        <Hr className='border-indigo-600 mb-20' />
         <section className='flex flex-wrap items-center gap-30 mb-40'>
           {DUMMY_TOPS.map((img) => (
             <div key={img.id} className='w-60 h-60 bg-blue-500 mb-10 rounded-8'></div>
@@ -30,7 +30,7 @@ export default function Closet() {
           </Link>
         </section>
         <span className='block mb-10 text-16 font-medium'>하의</span>
-        <Hr className='border-green-500 mb-20' />
+        <Hr className='border-indigo-600 mb-20' />
         <section className='flex flex-wrap items-center gap-30 mb-40'>
           {DUMMY_TOPS.map((img) => (
             <div key={img.id} className='w-60 h-60 bg-blue-500 mb-10 rounded-8'></div>
