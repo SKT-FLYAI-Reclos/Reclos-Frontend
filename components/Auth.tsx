@@ -9,7 +9,6 @@ const EXCEPTION_URL = ['/login', '/login/kakao-callback'];
 
 export default function Auth({ children }: { children: React.ReactNode }) {
   const { user, isLoading, isError } = useUser();
-  console.log('user', user, isLoading, isError);
 
   const router = useRouter();
   const pathname = usePathname();
