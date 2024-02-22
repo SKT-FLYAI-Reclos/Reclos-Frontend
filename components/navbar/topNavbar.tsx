@@ -10,7 +10,7 @@ export default function TopNavbar({
   return (
     <nav className='fixed z-topnav h-64 w-full flex justify-center items-center bg-white'>
       {left && <div className='absolute left-16 flex items-center'>{left}</div>}
-      {typeof title === 'string' ? <div className='text-20 text-blue-500'>{title}</div> : title}
+      {typeof title === 'string' ? <div className='text-18 text-indigo-600'>{title}</div> : title}
       {right && <div className='absolute right-16 flex items-center'>{right}</div>}
     </nav>
   );

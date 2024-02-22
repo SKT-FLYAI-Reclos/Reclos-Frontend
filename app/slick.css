@@ -30,5 +30,5 @@
 }
 
 .dots_custom li.slick-active button {
-  @apply bg-green-500;
+  @apply bg-indigo-600;
 }

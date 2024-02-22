@@ -26,7 +26,7 @@ export default function AlertAction({ title, style, handler, closeAlert }: Alert
     <button
       className={cls(
         'py-6 px-12 rounded-4 text-white text-16',
-        style === 'primary' ? 'bg-green-500' : style === 'danger' ? 'bg-red-500' : 'bg-gray-500'
+        style === 'primary' ? 'bg-indigo-600' : style === 'danger' ? 'bg-red-500' : 'bg-gray-500'
       )}
       onClick={handleClickAction}
     >

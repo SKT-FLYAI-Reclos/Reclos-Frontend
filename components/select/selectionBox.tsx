@@ -15,15 +15,15 @@ export default function SelectionBox<T>({
   onChange: (value: T) => void;
 }) {
   return (
-    <div className='flex border-2 border-solid border-green-500 overflow-hidden rounded-4'>
+    <div className='flex border-2 border-solid border-indigo-600 overflow-hidden rounded-4'>
       {options.map((option, i) => (
         <button
           key={i}
           onClick={() => onChange(option.value)}
           className={cls(
             'text-16 py-10 px-20 border-0',
-            value === option.value ? 'bg-green-500 text-white' : 'bg-white text-green-500',
-            i !== 0 ? 'border-l-2 border-solid border-l-green-500' : ''
+            value === option.value ? 'bg-indigo-600 text-white' : 'bg-white text-indigo-600',
+            i !== 0 ? 'border-l-2 border-solid border-l-indigo-600' : ''
           )}
         >
           {option.label}

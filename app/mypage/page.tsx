@@ -26,7 +26,7 @@ export default function MyPage() {
         {/* 신뢰 레벨 */}
         <div className='flex items-center gap-5'>
           <span>신뢰 레벨</span>
-          <div className='bg-green-500 text-white py-4 px-10 rounded-full text-12'>Lv.0</div>
+          <div className='bg-indigo-600 text-white py-4 px-10 rounded-full text-12'>Lv.0</div>
         </div>
         <div className='flex justify-end mb-10'>
           <span className='text-12 text-gray-400'>Lv.1 승급까지 - 60</span>

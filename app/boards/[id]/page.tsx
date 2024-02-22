@@ -50,13 +50,13 @@ async function Board({ id }: { id: number }) {
           </button>
           <Link
             href={`/cody?images=${board.images.map((img) => img.image).join(',')}`}
-            className=' grow py-12 bg-green-500 border-2 border-solid border-green-500 flex justify-center items-center text-white font-semibold text-18 rounded-8'
+            className=' grow py-12 bg-indigo-600 border-2 border-solid border-indigo-600 flex justify-center items-center text-white font-semibold text-18 rounded-8'
           >
             코디 생성하기
           </Link>
           <Link
             href={'/chatting'}
-            className='grow py-12 bg-white border-2 border-solid border-green-500 flex justify-center items-center text-green-500 font-semibold text-18 rounded-8'
+            className='grow py-12 bg-white border-2 border-solid border-indigo-600 flex justify-center items-center text-indigo-600 font-semibold text-18 rounded-8'
           >
             채팅하기
           </Link>
