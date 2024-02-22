@@ -61,7 +61,10 @@ function CreateCorrectedImg({
         <div className='overflow-hidden w-screen h-[100vw] relative shrink-0 mb-50'>
           <Image src={URL.createObjectURL(correctedClothImg)} alt='선택한 옷 이미지' fill objectFit='cover' />
         </div>
-        <section className='flex flex-col items-center mx-auto h-full'>
+        {/* <section className='flex flex-col items-center mx-auto h-full'>
+          
+        </section> */}
+        <section className='fixed bottom-10 left-20 w-[calc(100vw-40px)] flex flex-col gap-50'>
           <div>
             <div className='mb-10 text-16 text-indigo-600 font-semibold'>성별</div>
             <SelectionBox
@@ -71,7 +74,7 @@ function CreateCorrectedImg({
             />
           </div>
           <div className='w-full h-full flex justify-center items-center'>
-            <button className=' bg-indigo-600 rounded-4 text-16 text-white w-full py-10 flex justify-center items-center'>
+            <button className=' bg-indigo-600 rounded-8 text-16 text-white w-full py-10 flex justify-center items-center'>
               피팅 모델 생성하기
             </button>
           </div>

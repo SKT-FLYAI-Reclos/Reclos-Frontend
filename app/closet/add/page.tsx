@@ -145,7 +145,7 @@ export default function AddClothPage() {
         <button
           onClick={handleSubmit}
           className={cls(
-            'fixed left-20 bottom-5 w-[calc(100vw-40px)] bg-indigo-600 flex justify-center items-center py-10 px-20 box-border text-white rounded-8',
+            'fixed left-20 bottom-10 w-[calc(100vw-40px)] bg-indigo-600 flex justify-center items-center py-10 px-20 box-border text-white rounded-8',
             addClothMutation.isPending ? 'opacity-30' : ''
           )}
         >

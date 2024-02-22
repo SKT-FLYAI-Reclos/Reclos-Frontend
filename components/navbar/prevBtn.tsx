@@ -8,8 +8,8 @@ export default function PrevBtn({ title, ...props }: { title?: string } & HTMLAt
   const router = useRouter();
   return (
     <button {...props} onClick={props.onClick ?? router.back} className='flex justify-center items-center gap-5'>
-      <PrevIcon width='18' height='24' color='#3B82F6' />
-      <span className='text-16 font-normal text-blue-500'>{title}</span>
+      <PrevIcon width='18' height='24' color='#4F46E5' />
+      <span className='text-16 font-normal text-indigo-600'>{title}</span>
     </button>
   );
 }
