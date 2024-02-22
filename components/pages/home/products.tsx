@@ -37,7 +37,12 @@ export default async function Products() {
         {products.map((product) => (
           <Link href={`/boards/${product.id}`} key={product.id} className='mb-20'>
             <div className='relative w-[calc(100vw/2-10px-10px)] h-220 flex justify-center mb-10'>
-              <Image src={product.images[0].image} alt={product.title + '에 대한 상품 이미지'} fill objectFit='cover' />
+              <Image
+                src={product.images.length ? product.images[0].image : ''}
+                alt={product.title + '에 대한 상품 이미지'}
+                fill
+                objectFit='cover'
+              />
             </div>
             <span className='block text-16 mb-2'>{product.title}</span>
             <span className='block text-16 font-semibold mb-5'>{product.price}원</span>
