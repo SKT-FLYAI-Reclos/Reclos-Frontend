@@ -15,6 +15,7 @@ export default function KakaoCallback() {
 
   const code = searchParams.get('code') as string;
   useEffect(() => {
+    return;
     (async () => {
       try {
         const response = await kakaoLogin(code); // 서버에 로그인 요청
