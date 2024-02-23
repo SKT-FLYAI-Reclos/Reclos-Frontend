@@ -8,6 +8,7 @@ import { TSellForm } from '@/types/sellFormType';
 import Write from '@/components/pages/sell/write';
 import GetInfoCorrectedImgPage from '@/components/pages/sell/GetInfoCorrectedImg';
 import { generateInitialSellForm } from '@/constants/generateInitialSellForm';
+import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
 
 export default function SellPage() {
   const router = useRouter();
@@ -24,18 +25,37 @@ export default function SellPage() {
   // 원본 이미지로부터 보정된 옷 사진 생성
   function handleNext0To1(img: File) {
     // FIXME: 보정된 옷 사진 생성 api 호출 후 이미지 url 받아오기
+    setSellForm((prev) => ({ ...prev, correctedCloth: { ...prev.correctedCloth, status: 'loading' } }));
     const tempImg = 'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg';
-    setSellForm((prev) => ({ ...prev, correctedCloth: { ...prev.correctedCloth, image: tempImg } }));
-
-    setPage(1);
+    setTimeout(() => {
+      setSellForm((prev) => ({
+        ...prev,
+        correctedCloth: { ...prev.correctedCloth, image: tempImg, status: 'generated' },
+      }));
+      setPage(1);
+    }, 2000);
   }
 
   function handleNext1To2() {
     // 이미 생성된 피팅 모델이 있다면 다음 페이지로 이동
-    if (sellForm.fittingModel.status === 'generated') {
-      setPage(2);
-      return;
-    }
+    // if (sellForm.fittingModel.status === 'generated') {
+    //   setPage(2);
+    //   return;
+    // }
+    // 임시로 피팅 모델 이미지 생성
+    setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'loading' } }));
+    const tempImgs = [
+      'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
+      'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
+      'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
+    ];
+    setTimeout(() => {
+      setSellForm((prev) => ({
+        ...prev,
+        fittingModel: { ...prev.fittingModel, images: tempImgs, status: 'generated' },
+      }));
+    }, 2000);
+
     // TODO: 피팅 모델 생성 api 호출
 
     setPage(2);
@@ -63,6 +83,7 @@ export default function SellPage() {
         />
       )}
       {page === 2 && <Write sellForm={sellForm} setSellForm={setSellForm} toPrev={handleToPrev} />}
+      {sellForm.correctedCloth.status === 'loading' && <LoadingWithBackdrop title='보정된 옷 생성 중...' />}
     </AppLayout>
   );
 }

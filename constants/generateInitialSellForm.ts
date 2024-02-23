@@ -9,12 +9,12 @@ export function generateInitialSellForm(): TSellForm {
     description: null,
     correctedCloth: {
       image: null, // 보정된 옷 사진
-      status: 'none',
+      status: 'beforeGenerated',
     },
     originalClothImgs: null, // 원본 옷 사진
     fittingModel: {
       images: [], // 피팅 모델 이미지
-      status: 'loading',
+      status: 'beforeGenerated',
       selectedIdx: [],
     },
   };

@@ -78,7 +78,7 @@ export default function SelectPhoto({
   }
   return (
     <>
-      <TopNavbar left={<PrevBtn title='Back' onClick={handleToPrev} />} title='옷 선택하기' />
+      <TopNavbar left={<PrevBtn onClick={handleToPrev} />} title='옷 선택하기' />
       {!selectedClothImg ? (
         <BeforeSelectPhoto selectPhoto={selectPhoto} />
       ) : (
