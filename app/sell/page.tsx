@@ -1,26 +1,18 @@
 'use client';
 
-import SelectPhoto from '@/components/sell/selectPhotoPage';
+import SelectPhoto from '@/components/pages/sell/selectPhoto';
 import AppLayout from '@/components/layouts/appLayout';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import CreateCorrectedImgPage from '@/components/sell/CreateCorrectedImgPage';
 import { TSellForm } from '@/types/sellFormType';
-
-const initialSellForm: TSellForm = {
-  sex: 'both',
-  size: 'l',
-  title: null,
-  description: null,
-  price: null,
-  correctedClothImg: null,
-};
+import Write from '@/components/pages/sell/write';
+import GetInfoCorrectedImgPage from '@/components/pages/sell/GetInfoCorrectedImg';
+import { generateInitialSellForm } from '@/constants/generateInitialSellForm';
 
 export default function SellPage() {
   const router = useRouter();
   const [page, setPage] = useState(0);
-  const [selectedClothImg, setSelectedClothImg] = useState<File | null>(null);
-  const [sellForm, setSellForm] = useState<TSellForm>(initialSellForm);
+  const [sellForm, setSellForm] = useState<TSellForm>(generateInitialSellForm());
   function handleToPrev() {
     if (page === 0) {
       router.back();
@@ -28,29 +20,49 @@ export default function SellPage() {
       setPage(page - 1);
     }
   }
-  function handleToNext() {
-    setPage(page + 1);
+
+  // 원본 이미지로부터 보정된 옷 사진 생성
+  function handleNext0To1(img: File) {
+    // FIXME: 보정된 옷 사진 생성 api 호출 후 이미지 url 받아오기
+    const tempImg = 'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg';
+    setSellForm((prev) => ({ ...prev, correctedCloth: { ...prev.correctedCloth, image: tempImg } }));
+
+    setPage(1);
+  }
+
+  function handleNext1To2() {
+    // 이미 생성된 피팅 모델이 있다면 다음 페이지로 이동
+    if (sellForm.fittingModel.status === 'generated') {
+      setPage(2);
+      return;
+    }
+    // TODO: 피팅 모델 생성 api 호출
+
+    setPage(2);
   }
   return (
     <AppLayout showBNB={false}>
       {page === 0 && (
         <SelectPhoto
           toPrev={handleToPrev}
-          toNext={handleToNext}
-          selectedClothImg={selectedClothImg}
-          setSelectedClothImg={setSelectedClothImg}
-        />
-      )}
-      {page === 1 && (
-        <CreateCorrectedImgPage
-          toPrev={handleToPrev}
-          toNext={handleToNext}
-          selectedClothImg={selectedClothImg!}
-          setSelectedClothImg={setSelectedClothImg}
+          toNext={handleNext0To1}
+          selectedClothImg={sellForm.originalClothImgs?.[0] || null}
+          setSelectedClothImg={(img) => setSellForm((prev) => ({ ...prev, originalClothImgs: [img] }))} // 원본 옷 사진
           sellForm={sellForm}
           setSellForm={setSellForm}
         />
       )}
+      {page === 1 && (
+        <GetInfoCorrectedImgPage
+          toPrev={handleToPrev}
+          toNext={handleNext1To2}
+          clothImg={sellForm.correctedCloth.image || ''}
+          status={sellForm.correctedCloth.status}
+          sellForm={sellForm}
+          setSellForm={setSellForm}
+        />
+      )}
+      {page === 2 && <Write sellForm={sellForm} setSellForm={setSellForm} toPrev={handleToPrev} />}
     </AppLayout>
   );
 }
