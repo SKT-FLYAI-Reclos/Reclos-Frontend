@@ -1,9 +1,9 @@
 export type TSex = 'both' | 'male' | 'female';
 export type TSize = 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
-export type TGenerateStatus = 'none' | 'loading' | 'generated' | 'error';
+export type TGenerateStatus = 'beforeGenerated' | 'loading' | 'generated' | 'error';
 export type TFittingModel = {
   images: string[]; // 착용 모델 이미지 url
-  status: TGenerateStatus;
+  status: TGenerateStatus | 'selected';
   selectedIdx: number[];
 };
 

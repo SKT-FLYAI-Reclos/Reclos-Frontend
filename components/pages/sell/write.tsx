@@ -33,10 +33,7 @@ export default function Write({
     <>
       <TopNavbar left={<PrevBtn onClick={toPrev} />} title='판매글 작성하기' />
       <main className='h-[calc(100vh-64px)] pt-64 px-10 overflow-y-scroll'>
-        <SelectFittingModel
-          fittingModel={sellForm.fittingModel}
-          setFittingModel={(model) => setSellForm({ ...sellForm, fittingModel: model })}
-        />
+        <SelectFittingModel sellForm={sellForm} setSellForm={setSellForm} />
 
         {/* 원본 옷 사진 & 보정된 옷 사진 */}
         <section className='flex gap-10 mb-20'>
@@ -81,15 +78,24 @@ export default function Write({
                   <span className='text-14 text-gray-500'>여기를 눌러서 상의를 선택해주세요.</span>
                 </div>
               }
-              imgWidth={65}
-              imgHeight={65}
+              imgWidth={60}
+              imgHeight={60}
               displayMode='xflex'
             />
           </div>
           <div className='shrink-0 basis-100 w-100'>
             <span className='text-16 font-medium text-black block mb-10'>보정된 옷 사진</span>
-            <div className='w-80 h-80 bg-indigo-50 rounded-8 relative'>
-              <Image src={sellForm.correctedCloth.image!} alt='보정된 옷 사진' fill objectFit='contain' />
+            <div className='w-80 h-80 bg-indigo-50 rounded-8 flex justify-center items-center'>
+              <div className='relative overflow-hidden w-63 h-63 rounded-8 border-1 border-solid border-indigo-200'>
+                <Image
+                  src={sellForm.correctedCloth.image!}
+                  alt='보정된 옷 사진'
+                  objectFit='contain'
+                  width={0}
+                  height={0}
+                  className='w-full h-full'
+                />
+              </div>
             </div>
           </div>
         </section>

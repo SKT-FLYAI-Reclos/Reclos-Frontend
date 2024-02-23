@@ -35,7 +35,7 @@ export default function GetInfoCorrectedImg({
   ];
   return (
     <>
-      <TopNavbar left={<PrevBtn title='Back' onClick={toPrev} />} title='옷 정보 입력' />
+      <TopNavbar left={<PrevBtn onClick={toPrev} />} title='옷 정보 입력' />
       <main className='h-[calc(100vh-64px)] flex flex-col'>
         <div className='overflow-hidden w-screen h-[100vw] relative shrink-0 mb-30'>
           <Image src={clothImg} alt='보정된 옷 이미지' fill objectFit='cover' />
