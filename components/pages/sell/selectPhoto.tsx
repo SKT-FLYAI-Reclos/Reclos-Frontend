@@ -1,30 +1,69 @@
 'use client';
 
 import { useRef } from 'react';
-import PrevBtn from '../navbar/prevBtn';
-import TopNavbar from '../navbar/topNavbar';
+import PrevBtn from '../../navbar/prevBtn';
+import TopNavbar from '../../navbar/topNavbar';
 import Image from 'next/image';
 import useAlert from '@/recoil/alert/useAlert';
+import { TSellForm } from '@/types/sellFormType';
+import { generateInitialSellForm } from '@/constants/generateInitialSellForm';
 
 export default function SelectPhoto({
   toPrev,
   toNext,
-  selectedClothImg: correctedClothImg,
-  setSelectedClothImg: setCorrectedClothImg,
+  selectedClothImg,
+  setSelectedClothImg,
+  sellForm,
+  setSellForm,
 }: {
   toPrev: () => void;
-  toNext: () => void;
+  toNext: (img: File) => void;
   selectedClothImg: File | null;
   setSelectedClothImg: (img: File) => void;
+  sellForm: TSellForm;
+  setSellForm: (form: TSellForm) => void;
 }) {
   const { showAlert } = useAlert();
   const inputRef = useRef<HTMLInputElement>(null);
   function selectPhoto() {
-    inputRef.current?.click();
+    const isExist = sellForm.originalClothImgs;
+    if (!isExist) {
+      inputRef.current?.click();
+      return;
+    }
+
+    // 이미 선택된 사진이 있다면 경고
+
+    showAlert({
+      alertViewTitle: '사진을 변경하면 작성된 모든 항목이 초기화됩니다. 계속하시겠습니까?',
+      alertActions: [
+        { title: '취소', style: 'primary', handler: null },
+        {
+          title: '확인',
+          style: 'danger',
+          handler: () => inputRef.current?.click(),
+        },
+      ],
+    });
+  }
+
+  function handleOnChangePhoto(e: React.ChangeEvent<HTMLInputElement>) {
+    const selectedPhoto = e.target.files?.[0];
+    if (!selectedPhoto) return;
+
+    if (!sellForm.originalClothImgs) {
+      setSelectedClothImg(selectedPhoto);
+      return;
+    }
+
+    // 이미 선택된 사진이 있다면 경고 후 작성된 항목 초기화
+    const initialSellForm = generateInitialSellForm();
+    initialSellForm.originalClothImgs = [selectedPhoto];
+    setSellForm(initialSellForm);
   }
 
   function handleToPrev() {
-    if (correctedClothImg) {
+    if (selectedClothImg) {
       // promp('페이지에서 나가면 선택한 사진이 사라집니다. 계속하시겠습니까?');
       showAlert({
         alertViewTitle: '페이지에서 나가면 선택한 사진이 사라집니다. 계속하시겠습니까?',
@@ -40,22 +79,12 @@ export default function SelectPhoto({
   return (
     <>
       <TopNavbar left={<PrevBtn title='Back' onClick={handleToPrev} />} title='옷 선택하기' />
-      {!correctedClothImg ? (
+      {!selectedClothImg ? (
         <BeforeSelectPhoto selectPhoto={selectPhoto} />
       ) : (
-        <AfterSelectPhoto correctedClothImg={correctedClothImg} selectPhoto={selectPhoto} toNext={toNext} />
+        <AfterSelectPhoto selectedClothImg={selectedClothImg} selectPhoto={selectPhoto} toNext={toNext} />
       )}
-      <input
-        ref={inputRef}
-        onChange={(e) => {
-          if (e.target.files?.length) {
-            setCorrectedClothImg(e.target.files[0]);
-          }
-        }}
-        type='file'
-        accept='image/*'
-        className='hidden'
-      />
+      <input ref={inputRef} onChange={handleOnChangePhoto} type='file' accept='image/*' className='hidden' />
     </>
   );
 }
@@ -64,12 +93,6 @@ function BeforeSelectPhoto({ selectPhoto }: { selectPhoto: () => void }) {
   return (
     <main className='flex flex-col items-center justify-center h-[calc(100vh-64px)] relative'>
       <div className='px-40'>Reclos에서는 피팅 모델을 생성할 수 있어요. 옷을 앞 뒤로 찍어봐요 ..... 어쩌고 저쩌고</div>
-      {/* <button
-        onClick={selectPhoto}
-        className='py-10 px-20 text-16 rounded-4 bg-indigo-600 text-white absolute bottom-50'
-      >
-        
-      </button> */}
       <button
         onClick={selectPhoto}
         className='fixed left-20 bottom-10 w-[calc(100vw-40px)] bg-indigo-600 flex justify-center items-center py-10 px-20 box-border text-white rounded-8'
@@ -81,18 +104,18 @@ function BeforeSelectPhoto({ selectPhoto }: { selectPhoto: () => void }) {
 }
 
 function AfterSelectPhoto({
-  correctedClothImg,
+  selectedClothImg,
   selectPhoto,
   toNext,
 }: {
-  correctedClothImg: File;
+  selectedClothImg: File;
   selectPhoto: () => void;
-  toNext: () => void;
+  toNext: (img: File) => void;
 }) {
   return (
     <main className='flex flex-col items-center h-[calc(100vh-64px)]'>
       <div className='overflow-hidden w-screen h-[100vw] relative shrink-0'>
-        <Image src={URL.createObjectURL(correctedClothImg)} alt='선택한 옷 이미지' fill objectFit='cover' />
+        <Image src={URL.createObjectURL(selectedClothImg)} alt='선택한 옷 이미지' fill objectFit='cover' />
       </div>
       <div className='fixed bottom-10 left-20 w-[calc(100vw-40px)] flex flex-col gap-10'>
         <button
@@ -102,7 +125,7 @@ function AfterSelectPhoto({
           다시 선택하기
         </button>
         <button
-          onClick={toNext}
+          onClick={() => toNext(selectedClothImg)}
           className='w-full py-10 text-16 rounded-8 bg-indigo-600 text-white border-2 border-solid border-indigo-600 flex justify-center items-center'
         >
           선택 완료

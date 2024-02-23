@@ -1,4 +1,5 @@
 import cls from '@/libs/cls';
+import { HTMLAttributes } from 'react';
 
 export type TSelectionBoxOption<T> = {
   label: string;
@@ -8,18 +9,25 @@ export type TSelectionBoxOption<T> = {
 export default function SelectionBox<T>({
   value,
   options,
-  onChange,
+  onValueChange,
+  ...props
 }: {
   value: T;
   options: TSelectionBoxOption<T>[];
-  onChange: (value: T) => void;
-}) {
+  onValueChange: (value: T) => void;
+} & HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className='flex items-center border-2 border-solid border-indigo-600 overflow-hidden rounded-8'>
+    <div
+      {...props}
+      className={cls(
+        'flex items-center border-2 border-solid border-indigo-600 overflow-hidden rounded-8',
+        props.className ?? ''
+      )}
+    >
       {options.map((option, i) => (
         <button
           key={i}
-          onClick={() => onChange(option.value)}
+          onClick={() => onValueChange(option.value)}
           style={{ width: `${100 / options.length}%` }}
           className={cls(
             'text-16 py-10 border-0 flex justify-center items-center',

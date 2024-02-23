@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import AppLayout from '@/components/layouts/appLayout';
 import PrevBtn from '@/components/navbar/prevBtn';
 import TopNavbar from '@/components/navbar/topNavbar';
-import ImagesSelectTool from '@/components/utils/selectImagesTool';
+import SelectImagesTool from '@/components/utils/selectImagesTool';
 import PhotoAddIcon from '../../../public/icons/photo--add.svg';
 import useSelectImagesTool from '@/hooks/useSelectImagesTool';
 import cls from '@/libs/cls';
@@ -87,7 +87,7 @@ export default function AddClothPage() {
             </>
           )}
         </div>
-        <ImagesSelectTool
+        <SelectImagesTool
           {...topClothToolConfig}
           maxLength={MAX_IMG_COUNT}
           maxCol={4}
@@ -98,6 +98,9 @@ export default function AddClothPage() {
               <span className='text-14 text-gray-500'>여기를 눌러서 상의를 선택해주세요.</span>
             </div>
           }
+          imgWidth={65}
+          imgHeight={65}
+          displayMode='grid'
         />
 
         {/* ------------------하의 추가하기------------------ */}
@@ -129,7 +132,7 @@ export default function AddClothPage() {
             </>
           )}
         </div>
-        <ImagesSelectTool
+        <SelectImagesTool
           {...bottomClothToolConfig}
           maxLength={MAX_IMG_COUNT}
           maxCol={4}
@@ -140,6 +143,9 @@ export default function AddClothPage() {
               <span className='text-14 text-gray-500'>여기를 눌러서 하의를 선택해주세요.</span>
             </div>
           }
+          imgWidth={65}
+          imgHeight={65}
+          displayMode='grid'
         />
 
         <button

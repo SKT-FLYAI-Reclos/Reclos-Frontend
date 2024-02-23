@@ -3,6 +3,7 @@
 import { kakaoLogin } from '@/apis/loginApi';
 import { user } from '@/class/user';
 import AppLayout from '@/components/layouts/appLayout';
+import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
 import QUERY_KEYS from '@/constants/queryKeys';
 import { KAKAO_REDIRECT_URI_DEPLOY, KAKAO_REDIRECT_URI_DEVELOPMENT } from '@/constants/redirectUri';
 import { useQueryClient } from '@tanstack/react-query';
@@ -16,6 +17,7 @@ export default function KakaoCallback() {
 
   const code = searchParams.get('code') as string;
   useEffect(() => {
+    return;
     (async () => {
       try {
         // 서버에 로그인 요청
@@ -24,12 +26,13 @@ export default function KakaoCallback() {
           process.env.NODE_ENV === 'development' ? KAKAO_REDIRECT_URI_DEVELOPMENT : KAKAO_REDIRECT_URI_DEPLOY
         );
         if (response.status === 200) {
-          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GET_USER] });
           const {
             access,
             user: { pk, username },
           } = response.data;
           user.setAccessToken(access);
+          user.id = pk;
+          queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GET_USER] });
           router.replace('/');
         } else {
           throw new Error();
@@ -40,5 +43,9 @@ export default function KakaoCallback() {
       }
     })();
   }, [router, code, queryClient]);
-  return <AppLayout showBNB={false}>카카오 로그인 콜백 페이지</AppLayout>;
+  return (
+    <AppLayout showBNB={false}>
+      <LoadingWithBackdrop />
+    </AppLayout>
+  );
 }

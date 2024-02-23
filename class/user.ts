@@ -7,8 +7,10 @@ class User {
 
   constructor() {
     // this._accessToken = null;
+
+    // 임시 토큰
     this._accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4NTg3MjMxLCJpYXQiOjE3MDg1ODM2MzEsImp0aSI6ImZiYjVhYTRkNGNmYzRlMWNiNWY2ZjM1ZWEzMmMwMDg1IiwidXNlcl9pZCI6N30._l32R29bE-m6EmV1OGs24mhPEr8j0GDlf79koDzCJ8U';
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExMTgzODI3LCJpYXQiOjE3MDg1OTE4MjcsImp0aSI6IjZlZjU5YmFjOTRmYTQ0ODVhM2YwMzEwODA4ZTJjNTBmIiwidXNlcl9pZCI6N30.4t3VLtAScG5UVKOM1gt9UMVTPzajQn07PtYcdYj3h3c';
     this._refreshToken = null;
     // this.id = null;
     this.id = 7;

@@ -3,11 +3,14 @@ import { useState } from 'react';
 
 type TMode = 'normal' | 'add' | 'delete';
 
-export default function useSelectImagesTool(maxLength: number) {
-  const [selectedImgs, setSelectedImgs] = useState<File[]>([]);
+export default function useSelectImagesTool(maxLength: number, initialImgs: File[] = [], fixedImgCount = 0) {
+  const [selectedImgs, setSelectedImgs] = useState<File[]>(initialImgs);
   const [mode, setMode] = useState<TMode>('normal');
 
   const { showAlert } = useAlert();
+
+  if (fixedImgCount > initialImgs.length)
+    throw new Error('고정할 이미지 개수가 초기 이미지 개수보다 많을 수 없습니다.');
 
   function changeMode(mode: TMode) {
     switch (mode) {
@@ -37,5 +40,5 @@ export default function useSelectImagesTool(maxLength: number) {
     }
   }
 
-  return { config: { selectedImgs, setSelectedImgs, setMode, mode }, selectedImgs, mode, changeMode };
+  return { config: { selectedImgs, setSelectedImgs, setMode, mode, fixedImgCount }, selectedImgs, mode, changeMode };
 }
