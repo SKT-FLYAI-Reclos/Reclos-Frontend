@@ -2,6 +2,6 @@
 
 import WaterDrop from '../../public/icons/water-drop.svg';
 
-export default function WaterDropIcon() {
-  return <WaterDrop />;
+export default function WaterDropIcon({ ...props }) {
+  return <WaterDrop {...props} />;
 }

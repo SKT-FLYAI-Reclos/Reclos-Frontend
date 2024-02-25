@@ -46,7 +46,7 @@ export default function Banner({ slides }: { slides: { src: string; alt: string 
             src={slide.src}
             alt={slide.alt}
             object-fit='contain'
-            // priority
+            priority
             placeholder='blur'
             blurDataURL={slide.src}
             sizes='1040px'
