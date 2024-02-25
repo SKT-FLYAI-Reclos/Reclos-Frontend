@@ -16,7 +16,7 @@ export default function AppLayout({
     <html lang='ko'>
       <body className={'font-spoqa relative min-h-screen'}>
         {tnb}
-        <div className={cls(tnb ? 'pt-64' : '', showBNB ? 'pb-70' : '')}>
+        <div className={cls(tnb ? 'pt-64' : '', showBNB ? 'pb-60' : '')}>
           {children}
           {showBNB && <BottomNavbar />}
           <AlertView />
