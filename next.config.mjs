@@ -7,6 +7,7 @@ const nextConfig = {
     // 'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/*'
     remotePatterns: [
       { protocol: 'https', hostname: 'reclosbucket.s3.ap-northeast-2.amazonaws.com', port: '', pathname: '/**/*' },
+      { protocol: 'https', hostname: 'reclosbucket.s3.ap-northeast-2.amazonaws.com', port: '', pathname: '/*' },
     ],
   },
 
