@@ -52,7 +52,7 @@ export const allCategories: { name: string; img: string }[] = [
   },
   {
     name: '원피스',
-    img: '/categories/원피스.jpeg',
+    img: '/categories/원피스.png',
   },
 ];
 
