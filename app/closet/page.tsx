@@ -20,7 +20,7 @@ const DUMMY_TOPS = Array.from({ length: 10 }, (_, i) => ({
 
 export default function ClosetWrapper() {
   return (
-    <Suspense fallback={<div>loading...</div>}>
+    <Suspense>
       <Closet />
     </Suspense>
   );
@@ -33,9 +33,9 @@ type TGetClosetResponse = {
 
 async function Closet() {
   // const clothes = await getCloset(user.id as number).then((res) => res.data);
-  const clothes: TGetClosetResponse = await fetch(defaultUrl + `api/user/${user.id as number}/closet`).then((res) =>
-    res.json()
-  );
+  const clothes: TGetClosetResponse = await fetch(defaultUrl + `api/user/${user.id as number}/closet`, {
+    cache: 'no-store',
+  }).then((res) => res.json());
   return (
     <AppLayout
       tnb={
