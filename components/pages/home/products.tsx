@@ -31,7 +31,6 @@ type TProduct = {
 
 export default async function Products() {
   const products: TProduct[] = await fetch(defaultUrl + 'api/board', { cache: 'no-store' }).then((res) => res.json());
-  console.log(products[0].images);
   return (
     <main className=' h-full'>
       <div className='flex flex-wrap justify-between items-center gap-15 px-10'>

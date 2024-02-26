@@ -1,19 +1,18 @@
+import { user } from '@/class/user';
 import CreditGauge from '@/components/creditGauge';
 import CO2Icon from '@/components/icons/co2Icon';
-import HeartIcon from '@/components/icons/heartIcon';
 import ProfileFillIcon from '@/components/icons/profileFillIcon';
 import WaterDropIcon from '@/components/icons/waterDropIcon';
 import AppLayout from '@/components/layouts/appLayout';
-import Logo from '@/components/logo';
 import PrevBtn from '@/components/navbar/prevBtn';
 import TopNavbar from '@/components/navbar/topNavbar';
 import Banner from '@/components/pages/boards/banner';
+import LikeBtn from '@/components/pages/boards/likeBtn';
 import { defaultUrl } from '@/constants/defaultUrl';
 import { getDateDiff } from '@/libs/getDateDiff';
 import TClothImage from '@/types/clothImageType';
 import TUser from '@/types/userType';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { Suspense } from 'react';
 
 export default function BoardWrapper({ params: { id } }: { params: { id: number } }) {
@@ -92,11 +91,12 @@ async function Board({ id }: { id: number }) {
         </p>
         {/* Bottom Bar */}
         <section className='fixed bottom-0 left-0 flex items-center justify-between gap-20 w-full h-60 py-10 px-20 bg-white border-t-1 border-solid border-t-gray-light'>
-          <button>
-            <HeartIcon color='#4F46E5' width='30' height='27' />
-          </button>
+          <LikeBtn
+            isLiked={user.id !== null && board.likes.find((user_) => user_.id === user.id) !== undefined}
+            boardId={board.id}
+          />
           <Link
-            href={`/cody?images=${board.images.map((img) => img.image).join(',')}`}
+            href={`/cody?images=${board.images.map((img) => img.image).join(',')}&cloth_type=${'top'}`} // TODO: cloth_type api 연결
             className=' grow py-12 bg-indigo-600 border-2 border-solid border-indigo-600 flex justify-center items-center text-white font-semibold text-16 rounded-8'
           >
             코디 생성하기
