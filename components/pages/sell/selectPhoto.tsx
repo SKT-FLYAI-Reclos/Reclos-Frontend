@@ -95,7 +95,7 @@ function BeforeSelectPhoto({ selectPhoto }: { selectPhoto: () => void }) {
       <div className='px-40'>Reclos에서는 피팅 모델을 생성할 수 있어요. 옷을 앞 뒤로 찍어봐요 ..... 어쩌고 저쩌고</div>
       <button
         onClick={selectPhoto}
-        className='fixed left-20 bottom-10 w-[calc(100vw-40px)] bg-indigo-600 flex justify-center items-center py-10 px-20 box-border text-white rounded-8'
+        className='fixed left-20 bottom-10 w-[calc(100vw-40px)] text-16 bg-indigo-600 flex justify-center items-center py-12 px-20 box-border text-white rounded-8'
       >
         생성하기
       </button>
