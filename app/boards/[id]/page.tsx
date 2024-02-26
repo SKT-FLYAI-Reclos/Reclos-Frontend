@@ -4,6 +4,7 @@ import CO2Icon from '@/components/icons/co2Icon';
 import ProfileFillIcon from '@/components/icons/profileFillIcon';
 import WaterDropIcon from '@/components/icons/waterDropIcon';
 import AppLayout from '@/components/layouts/appLayout';
+import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
 import PrevBtn from '@/components/navbar/prevBtn';
 import TopNavbar from '@/components/navbar/topNavbar';
 import Banner from '@/components/pages/boards/banner';
@@ -18,7 +19,7 @@ import { Suspense } from 'react';
 export default function BoardWrapper({ params: { id } }: { params: { id: number } }) {
   return (
     <AppLayout tnb={<TopNavbar left={<PrevBtn />} />} showBNB={false}>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<LoadingWithBackdrop />}>
         <Board id={id} />
       </Suspense>
     </AppLayout>
@@ -27,6 +28,7 @@ export default function BoardWrapper({ params: { id } }: { params: { id: number 
 
 async function Board({ id }: { id: number }) {
   const board: TBoard = await fetch(defaultUrl + `api/board/${id}`, { cache: 'no-store' }).then((res) => res.json());
+  console.log(board);
   return (
     <div className='h-[calc(100vh-64px-60px)] overflow-y-scroll'>
       <Banner slides={board.images.map((img) => ({ src: img.image, alt: '상품 모델 사진' }))} />
@@ -39,7 +41,7 @@ async function Board({ id }: { id: number }) {
           </div>
           {/* 신뢰 레벨 */}
           <div className='flex flex-col gap-2 w-70'>
-            <span className='font-medium text-indigo-600'>Lv.{board.author.level[0].manner_level}</span>
+            <span className='font-medium text-indigo-600'>Lv.{board.author.level[0]?.manner_level || 3}</span>
             <CreditGauge className='w-full h-10' />
             <span className='text-12 text-gray-400 self-end'>신뢰 레벨</span>
           </div>

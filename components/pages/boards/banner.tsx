@@ -36,6 +36,7 @@ const settings: Settings = {
 };
 
 export default function Banner({ slides }: { slides: { src: string; alt: string }[] }) {
+  slides = slides.length === 1 ? [...slides, ...slides] : slides;
   return (
     <Slider {...settings} className='mb-10'>
       {slides.map((slide, index) => (
