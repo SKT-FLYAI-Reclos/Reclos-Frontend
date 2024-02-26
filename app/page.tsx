@@ -5,13 +5,14 @@ import Banner from '@/components/pages/home/banner';
 import CategoryMenu from '@/components/pages/home/cateroryMenu';
 import SellBtn from '@/components/pages/home/sellBtn';
 import { Suspense } from 'react';
+import HomeProductsLoading from '@/components/loading/homeProductsLoading';
 
 export default function Home() {
   return (
     <AppLayout tnb={<HomeTopNavBar />}>
       <Banner />
       <CategoryMenu />
-      <Suspense fallback={<div>로딩중...</div>}>
+      <Suspense fallback={<HomeProductsLoading />}>
         <Products />
       </Suspense>
       <SellBtn />
