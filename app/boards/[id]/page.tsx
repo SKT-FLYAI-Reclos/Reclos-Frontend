@@ -19,7 +19,8 @@ import { Suspense } from 'react';
 
 export default function BoardWrapper({ params: { id } }: { params: { id: number } }) {
   return (
-    <AppLayout tnb={<TopNavbar left={<PrevBtn />} />} showBNB={false}>
+    <AppLayout showBNB={false}>
+      <TopNavbar left={<PrevBtn />} autoOpaque showBorder={false} />
       <Suspense fallback={<BoardLoading />}>
         <Board id={id} />
       </Suspense>
@@ -30,7 +31,7 @@ export default function BoardWrapper({ params: { id } }: { params: { id: number 
 async function Board({ id }: { id: number }) {
   const board: TBoard = await fetch(defaultUrl + `api/board/${id}`, { cache: 'no-store' }).then((res) => res.json());
   return (
-    <div className='h-[calc(100vh-64px-60px)] overflow-y-scroll'>
+    <div className='h-[calc(100vh-60px)] overflow-y-scroll'>
       <Banner slides={board.images.map((img) => ({ src: img.image, alt: '상품 모델 사진' }))} />
       <main className='px-20'>
         <section className='flex items-center justify-between mb-20'>

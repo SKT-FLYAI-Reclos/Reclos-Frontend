@@ -12,11 +12,13 @@ import postAddClothes from '@/apis/addClothesApi';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
+import useAlert from '@/recoil/alert/useAlert';
 
 const MAX_IMG_COUNT = 20;
 
 export default function AddClothPage() {
   const router = useRouter();
+  const { showAlert } = useAlert();
   const {
     config: topClothToolConfig,
     selectedImgs: selectedTopClothImgs,
@@ -39,18 +41,29 @@ export default function AddClothPage() {
   async function handleSubmit() {
     const isEmpty = selectedTopClothImgs.length === 0 && selectedBottomClothImgs.length === 0;
     if (isEmpty) {
-      alert('상의나 하의 중 하나는 선택해야 합니다.');
+      showAlert({
+        alertViewTitle: '상의나 하의 중 하나는 필수로 선택해야 합니다.',
+        alertActions: [{ title: '확인', style: 'primary', handler: null }],
+      });
       return;
     }
     addClothMutation.mutate(
       { topClothes: selectedTopClothImgs, bottomClothes: selectedBottomClothImgs },
       {
         onSuccess: () => {
-          alert('옷 추가에 성공했습니다.');
-          router.replace('/closet');
+          // alert('옷 추가에 성공했습니다.');
+          showAlert({
+            alertViewTitle: '옷 추가에 성공했습니다.',
+            alertActions: [{ title: '확인', style: 'primary', handler: () => router.replace('/closet') }],
+          });
+          // router.replace('/closet');
         },
         onError: (error) => {
-          alert(error.message);
+          // alert(error.message);
+          showAlert({
+            alertViewTitle: error.message,
+            alertActions: [{ title: '확인', style: 'primary', handler: null }],
+          });
         },
       }
     );

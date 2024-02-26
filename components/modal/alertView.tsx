@@ -21,7 +21,7 @@ export default function AlertView() {
       {show && (
         <BackDrop onBackdropClick={closeWithTouchBackdrop ? closeAlert : undefined}>
           <ModalView className=' w-full max-w-500 mx-20 box-border bg-white rounded-4'>
-            <div className={cls('p-16 font-semibold text-16 border-b-1 border-solid border-[#F0F0F5] text-black')}>
+            <div className={cls('p-16 font-medium text-16 border-b-1 border-solid border-[#F0F0F5] text-gray-600')}>
               {alertViewTitle}
             </div>
             {alertViewDesc && <div className='mt-15 text-14'>{alertViewDesc}</div>}

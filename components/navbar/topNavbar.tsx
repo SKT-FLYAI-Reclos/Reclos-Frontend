@@ -5,17 +5,20 @@ export default function TopNavbar({
   title,
   right,
   showBorder = true,
+  autoOpaque = false, // true일 경우 -> 최초 투명, 스크롤시 흰색
 }: {
   left?: React.ReactNode;
   title?: React.ReactNode | string;
   right?: React.ReactNode;
   showBorder?: boolean;
+  autoOpaque?: boolean;
 }) {
   return (
     <nav
       className={cls(
-        'fixed z-topnav h-64 w-full flex justify-center items-center bg-white',
-        showBorder ? 'border-b-1 border-solid border-b-gray-light' : ''
+        'fixed z-topnav h-64 w-full flex justify-center items-center',
+        showBorder ? 'border-b-1 border-solid border-b-gray-light' : '',
+        autoOpaque ? 'bg-none' : 'bg-white'
       )}
     >
       {left && <div className='absolute left-20 flex items-center'>{left}</div>}
