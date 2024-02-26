@@ -8,14 +8,19 @@ import WaterDropIcon from '@/components/icons/waterDropIcon';
 import LevelChart from '@/components/pages/mypage/levelChart';
 import TreeIcon from '@/components/icons/treeIcon';
 import CreditGauge from '@/components/creditGauge';
+import SettingIcon from '@/components/icons/settingIcon';
 
 export default function MyPage() {
   return (
-    <AppLayout tnb={<TopNavbar left={<Logo className='text-28 font-bold' />} />}>
+    <AppLayout
+      tnb={
+        <TopNavbar left={<span className='text-16 font-medium'>My</span>} right={<SettingIcon />} showBorder={false} />
+      }
+    >
       <main className='px-20 pt-20'>
         <Link href={'#'} className='flex items-center justify-between bg-gray-light p-20 rounded-12 mb-20'>
           <div className='flex items-center gap-10'>
-            <ProfileFillIcon />
+            <ProfileFillIcon width='50' height='50' />
             <div>
               <span className='block mb-2 text-16 font-medium'>홍범순</span>
               <span className=' text-gray-400 text-12'>기본 정보 보기</span>
@@ -35,7 +40,7 @@ export default function MyPage() {
         <div className='flex items-center justify-between'>
           {/* 물 레벨 */}
           <div className=''>
-            <WaterDropIcon />
+            <WaterDropIcon width='20' height='27' />
             <LevelChart level={5} score={70} color='#2563EB' className='w-150 h-150' />
           </div>
           {/* 나무 레벨 */}
