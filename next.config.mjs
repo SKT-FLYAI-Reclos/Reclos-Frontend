@@ -10,6 +10,15 @@ const nextConfig = {
       { protocol: 'https', hostname: 'reclosbucket.s3.ap-northeast-2.amazonaws.com', port: '', pathname: '/*' },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/v2/:path*/',
+        destination: `${process.env.NEXT_PUBLIC_DEV_BASE_URL}/:path*/`,
+      },
+    ];
+  },
+  trailingSlash: true,
 
   // svg 사용할 때 <Icon /> 처럼 사용하기 위함
   webpack: (config) => {

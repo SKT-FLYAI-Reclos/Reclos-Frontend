@@ -33,22 +33,22 @@ function getNavItem(pathname: string, icon: TNavItem) {
     case 'closet':
       return (
         <Link href={'/closet'} className='flex flex-col justify-center items-center gap-5 w-60 h-60'>
-          <ClosetIcon stroke={pathname === '/closet' ? 'black' : '#9CA3AF'} />
-          <span className={cls('text-12', pathname === '/closet' ? 'text-black' : 'text-gray-400')}>옷장</span>
+          <ClosetIcon stroke={pathname === '/closet/' ? 'black' : '#9CA3AF'} />
+          <span className={cls('text-12', pathname === '/closet/' ? 'text-black' : 'text-gray-400')}>옷장</span>
         </Link>
       );
     case 'chatting':
       return (
         <Link href={'/chatting'} className='flex flex-col justify-center items-center gap-5 w-60 h-60'>
-          <ChattingIcon fill={pathname === '/chatting' ? 'black' : '#9CA3AF'} />
-          <span className={cls('text-12', pathname === '/chatting' ? 'text-black' : 'text-gray-400')}>채팅</span>
+          <ChattingIcon fill={pathname === '/chatting/' ? 'black' : '#9CA3AF'} />
+          <span className={cls('text-12', pathname === '/chatting/' ? 'text-black' : 'text-gray-400')}>채팅</span>
         </Link>
       );
     case 'mypage':
       return (
         <Link href={'/mypage'} className='flex flex-col justify-center items-center gap-5 w-60 h-60'>
-          <ProfileIcon fill={pathname === '/mypage' ? 'black' : '#9CA3AF'} />
-          <span className={cls('text-12', pathname === '/mypage' ? 'text-black' : 'text-gray-400')}>My</span>
+          <ProfileIcon fill={pathname === '/mypage/' ? 'black' : '#9CA3AF'} />
+          <span className={cls('text-12', pathname === '/mypage/' ? 'text-black' : 'text-gray-400')}>My</span>
         </Link>
       );
   }

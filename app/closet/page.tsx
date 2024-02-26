@@ -10,6 +10,8 @@ import { getCloset } from '@/apis/closetApi';
 import { user } from '@/class/user';
 import SettingIcon from '@/components/icons/settingIcon';
 import NoticeIcon from '@/components/navbar/notice';
+import TCloth from '@/types/clothType';
+import { defaultUrl } from '@/constants/defaultUrl';
 
 const DUMMY_TOPS = Array.from({ length: 10 }, (_, i) => ({
   id: i,
@@ -24,8 +26,16 @@ export default function ClosetWrapper() {
   );
 }
 
+type TGetClosetResponse = {
+  image: string;
+  cloth_type: TCloth;
+}[];
+
 async function Closet() {
-  const clothes = await getCloset(user.id as number).then((res) => res.data);
+  // const clothes = await getCloset(user.id as number).then((res) => res.data);
+  const clothes: TGetClosetResponse = await fetch(defaultUrl + `api/user/${user.id as number}/closet`).then((res) =>
+    res.json()
+  );
   return (
     <AppLayout
       tnb={
