@@ -20,7 +20,7 @@ const DUMMY_TOPS = Array.from({ length: 10 }, (_, i) => ({
 
 export default function ClosetWrapper() {
   return (
-    <Suspense>
+    <Suspense fallback={<div>loading...</div>}>
       <Closet />
     </Suspense>
   );
