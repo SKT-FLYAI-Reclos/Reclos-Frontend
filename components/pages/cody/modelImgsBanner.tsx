@@ -28,6 +28,7 @@ export default function ModelImgsBanner({
   currentImgIdx: number;
   setCurrentImgIdx: Dispatch<SetStateAction<number>>;
 }) {
+  modelImgs = modelImgs.length === 1 ? [...modelImgs, ...modelImgs] : modelImgs;
   const slickRef = useRef<Slider>(null);
 
   function handleShowPrev() {
