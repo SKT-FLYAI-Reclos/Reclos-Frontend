@@ -11,6 +11,7 @@ import cls from '@/libs/cls';
 import postAddClothes from '@/apis/addClothesApi';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
 
 const MAX_IMG_COUNT = 20;
 
@@ -158,6 +159,7 @@ export default function AddClothPage() {
           {addClothMutation.isPending ? '업로드 중...' : '추가하기'}
         </button>
       </main>
+      {addClothMutation.isPending && <LoadingWithBackdrop title='Uploading...' />}
     </AppLayout>
   );
 }

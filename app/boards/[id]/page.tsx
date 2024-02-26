@@ -28,7 +28,6 @@ export default function BoardWrapper({ params: { id } }: { params: { id: number 
 
 async function Board({ id }: { id: number }) {
   const board: TBoard = await fetch(defaultUrl + `api/board/${id}`, { cache: 'no-store' }).then((res) => res.json());
-  console.log(board);
   return (
     <div className='h-[calc(100vh-64px-60px)] overflow-y-scroll'>
       <Banner slides={board.images.map((img) => ({ src: img.image, alt: '상품 모델 사진' }))} />
