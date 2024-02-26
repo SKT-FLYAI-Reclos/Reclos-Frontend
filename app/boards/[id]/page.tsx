@@ -34,7 +34,7 @@ async function Board({ id }: { id: number }) {
         <section className='flex items-center justify-between mb-20'>
           {/* 프로필 / 이름 */}
           <div className='flex items-center gap-10'>
-            <ProfileFillIcon />
+            <ProfileFillIcon width='50' height='50' />
             <span className='font-medium text-16'>{board.author.username}</span>
           </div>
           {/* 신뢰 레벨 */}

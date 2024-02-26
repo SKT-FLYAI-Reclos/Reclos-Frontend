@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { getCloset } from '@/apis/closetApi';
 import { user } from '@/class/user';
+import SettingIcon from '@/components/icons/settingIcon';
+import NoticeIcon from '@/components/navbar/notice';
 
 const DUMMY_TOPS = Array.from({ length: 10 }, (_, i) => ({
   id: i,
@@ -25,7 +27,19 @@ export default function ClosetWrapper() {
 async function Closet() {
   const clothes = await getCloset(user.id as number).then((res) => res.data);
   return (
-    <AppLayout tnb={<TopNavbar left={<Logo className='text-28 font-bold' />} />}>
+    <AppLayout
+      tnb={
+        <TopNavbar
+          left={<span className='text-16 font-medium'>옷장</span>}
+          right={
+            <div className='flex justify-center items-center gap-20'>
+              <NoticeIcon width='20' height='21' unread />
+              <SettingIcon />
+            </div>
+          }
+        />
+      }
+    >
       <AddBtn />
       <main className='pt-30 px-20'>
         <span className='block mb-10 text-16 font-medium'>상의</span>

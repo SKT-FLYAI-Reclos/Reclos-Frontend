@@ -2,10 +2,10 @@
 
 import SearchIcon from '../../public/icons/search.svg';
 
-export default function Search() {
+export default function Search({ ...props }) {
   return (
     <button>
-      <SearchIcon />
+      <SearchIcon {...props} />
     </button>
   );
 }
