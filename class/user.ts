@@ -14,7 +14,7 @@ class User {
     this._refreshToken = null;
     // this.id = null;
     this.id = 7;
-    this.username = null;
+    this.username = '박지수';
   }
 
   getAccessToken() {

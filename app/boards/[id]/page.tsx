@@ -95,7 +95,7 @@ async function Board({ id }: { id: number }) {
         {/* Bottom Bar */}
         <section className='fixed bottom-0 left-0 flex items-center justify-between gap-20 w-full h-60 py-10 px-20 bg-white border-t-1 border-solid border-t-gray-light'>
           <LikeBtn
-            isLiked={user.id !== null && board.likes.find((user_) => user_.id === user.id) !== undefined}
+            isLiked={user.id !== null && board.likes.find((name) => name === user.username) !== undefined}
             boardId={board.id}
           />
           <Link
@@ -120,7 +120,7 @@ type TBoard = {
   id: number;
   author: TUser;
   images: TClothImage[];
-  likes: TUser[];
+  likes: string[]; // [user.name]
   title: string;
   content: string;
   category: string;
