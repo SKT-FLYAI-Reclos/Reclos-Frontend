@@ -4,6 +4,7 @@ import CO2Icon from '@/components/icons/co2Icon';
 import ProfileFillIcon from '@/components/icons/profileFillIcon';
 import WaterDropIcon from '@/components/icons/waterDropIcon';
 import AppLayout from '@/components/layouts/appLayout';
+import BoardLoading from '@/components/loading/boardLoading';
 import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
 import PrevBtn from '@/components/navbar/prevBtn';
 import TopNavbar from '@/components/navbar/topNavbar';
@@ -19,7 +20,7 @@ import { Suspense } from 'react';
 export default function BoardWrapper({ params: { id } }: { params: { id: number } }) {
   return (
     <AppLayout tnb={<TopNavbar left={<PrevBtn />} />} showBNB={false}>
-      <Suspense fallback={<LoadingWithBackdrop />}>
+      <Suspense fallback={<BoardLoading />}>
         <Board id={id} />
       </Suspense>
     </AppLayout>
