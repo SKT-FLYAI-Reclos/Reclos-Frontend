@@ -11,7 +11,15 @@ import cls from '@/libs/cls';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
 
-export default function Cody() {
+export default function CodyWrapper() {
+  return (
+    <Suspense>
+      <Cody />
+    </Suspense>
+  );
+}
+
+function Cody() {
   const searchParams = useSearchParams();
   const clothType = searchParams.get('cloth_type'); // 상의/하의
   const [originModelImgs, setOriginModelImgs] = useState<string[]>(searchParams.get('images')?.split(',') || []); // 원래 이미지들(초기화 시 사용)
