@@ -13,9 +13,11 @@ import CheckIcon from '../../../public/icons/check.svg';
 export default function SelectFittingModelWrapper({
   sellForm,
   setSellForm,
+  retryGenFittingModel,
 }: {
   sellForm: TSellForm;
   setSellForm: React.Dispatch<SetStateAction<TSellForm>>;
+  retryGenFittingModel: () => void;
 }) {
   const [showSelectFittingModel, setShowSelectFittingModel] = useState(false);
   const selectedImages = sellForm.fittingModel.images.filter((_, i) => sellForm.fittingModel.selectedIdx.includes(i));
@@ -35,20 +37,31 @@ export default function SelectFittingModelWrapper({
       )}
       <div
         onClick={sellForm.fittingModel.status === 'generated' ? () => setShowSelectFittingModel(true) : undefined}
-        className='w-full h-80 rounded-8 bg-indigo-50 mb-20'
+        className={cls(
+          'w-full h-80 rounded-8 mb-20',
+          sellForm.fittingModel.status === 'error' ? 'bg-red-200' : 'bg-indigo-50 '
+        )}
       >
         {sellForm.fittingModel.status === 'loading' && (
           <div className='flex items-center justify-center gap-7 w-full h-full'>
             <LoadingSpinner width={20} height={20} />
-            <span className='text-12 font-normal text-gray-500'>
+            <span className='text-14 font-normal text-gray-500'>
               피팅 모델이 생성되고 있어요. 잠시만 기다려주세요...
             </span>
           </div>
         )}
+        {sellForm.fittingModel.status === 'error' && (
+          <button
+            className='flex items-center justify-center gap-20 w-full h-full text-14'
+            onClick={retryGenFittingModel}
+          >
+            😥 에러가 발생했어요. 터치해서 다시 시도해보세요.
+          </button>
+        )}
         {sellForm.fittingModel.status === 'generated' && (
           <div className='flex items-center justify-center gap-10 w-full h-full'>
             <PhotoAddIcon />
-            <span className='text-12 text-gray-500'>피팅 모델이 완성되었어요! 사진을 선택해주세요.</span>
+            <span className='text-14 text-gray-500'>피팅 모델이 완성되었어요! 사진을 선택해주세요.</span>
           </div>
         )}
         {sellForm.fittingModel.status === 'selected' && (
@@ -98,7 +111,12 @@ function SelectFittingModel({
   function handleToNext() {
     if (isLastPage) {
       onClose();
-      setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'selected' } }));
+
+      if (sellForm.fittingModel.selectedIdx.length !== 0) {
+        setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'selected' } }));
+      } else {
+        setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'generated' } }));
+      }
       return;
     }
     setPage((prev) => prev + 1);

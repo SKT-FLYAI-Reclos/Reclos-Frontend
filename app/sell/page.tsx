@@ -44,21 +44,18 @@ export default function SellPage() {
   }
 
   function handleNext1To2() {
-    // 이미 생성된 피팅 모델이 있다면 다음 페이지로 이동
-    // if (sellForm.fittingModel.status === 'generated') {
-    //   setPage(2);
-    //   return;
-    // }
-    // 임시로 피팅 모델 이미지 생성
     setPage(2);
-    setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'loading' } }));
-    const tempImgs = [
-      'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
-      'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
-      'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
-    ];
 
-    // TODO: 피팅 모델 생성 api 호출
+    // 이미 생성된 피팅 모델이 있다면 다시 생성하지 않음
+    if (sellForm.fittingModel.status === 'generated' || sellForm.fittingModel.status === 'selected') {
+      return;
+    }
+    fetchGenFittingModel();
+  }
+
+  function fetchGenFittingModel() {
+    setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'loading' } }));
+
     genFittingmodelMutation.mutate(sellForm.correctedCloth.uuid as string, {
       onSuccess: ({ data: res }) => {
         const images = res.map((item) => item.image);
@@ -98,7 +95,14 @@ export default function SellPage() {
           setSellForm={setSellForm}
         />
       )}
-      {page === 2 && <Write sellForm={sellForm} setSellForm={setSellForm} toPrev={handleToPrev} />}
+      {page === 2 && (
+        <Write
+          retryGenFittingModel={fetchGenFittingModel}
+          sellForm={sellForm}
+          setSellForm={setSellForm}
+          toPrev={handleToPrev}
+        />
+      )}
       {sellForm.correctedCloth.status === 'loading' && <LoadingWithBackdrop title='AI가 배경을 지우는 중..' />}
     </AppLayout>
   );

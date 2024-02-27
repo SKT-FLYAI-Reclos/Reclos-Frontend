@@ -21,10 +21,12 @@ export default function Write({
   sellForm,
   setSellForm,
   toPrev,
+  retryGenFittingModel,
 }: {
   sellForm: TSellForm;
   setSellForm: React.Dispatch<SetStateAction<TSellForm>>;
   toPrev: () => void;
+  retryGenFittingModel: () => void;
 }) {
   const {
     config: OriginalImgToolConfig,
@@ -95,9 +97,9 @@ export default function Write({
   }
   return (
     <>
-      <TopNavbar left={<PrevBtn onClick={toPrev} />} title='판매글 작성하기' />
-      <main className='h-[calc(100vh-64px)] pt-64 px-10 overflow-y-scroll'>
-        <SelectFittingModel sellForm={sellForm} setSellForm={setSellForm} />
+      <TopNavbar left={<PrevBtn onClick={toPrev} />} title='판매글 작성하기' showBorder={false} />
+      <main className='h-[calc(100vh-64px)] pt-84 px-10 overflow-y-scroll'>
+        <SelectFittingModel retryGenFittingModel={retryGenFittingModel} sellForm={sellForm} setSellForm={setSellForm} />
 
         {/* 원본 사진 & 상품 사진 */}
         <section className='flex gap-10 mb-20'>
