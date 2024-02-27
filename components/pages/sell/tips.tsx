@@ -8,7 +8,9 @@ export default function Tips({ selectPhoto }: { selectPhoto: () => void }) {
   const [page, setPage] = useState(0);
 
   function handleClickNext() {
+    if (page === 3) return;
     if (page === 2) {
+      setPage(page + 1);
       selectPhoto();
     } else {
       setPage(page + 1);
@@ -33,7 +35,7 @@ export default function Tips({ selectPhoto }: { selectPhoto: () => void }) {
           onClick={handleClickNext}
           className='w-full text-16 border-2 border-solid border-indigo-600 bg-indigo-600 flex justify-center items-center py-12 px-20 box-border text-white rounded-8'
         >
-          {page === 2 ? '생성하기' : '다음'}
+          {page >= 2 ? '생성하기' : '다음'}
         </button>
       </div>
     </main>
