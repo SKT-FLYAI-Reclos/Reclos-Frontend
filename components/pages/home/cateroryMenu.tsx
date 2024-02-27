@@ -46,7 +46,7 @@ function LeftDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
             title={<span className='text-black font-semibold text-18'>카테고리</span>}
             right={
               <button onClick={onClose} className=' top-20 right-20 text-black'>
-                <CloseIcon width='16' height='16' />
+                <CloseIcon width='16' height='16' stroke-width='2.5' />
               </button>
             }
           />

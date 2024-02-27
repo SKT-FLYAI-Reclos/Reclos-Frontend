@@ -15,7 +15,7 @@ export default function Auth({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   useEffect(() => {
     if (isError && !EXCEPTION_URL.includes(pathname)) {
-      router.replace('/login');
+      // router.replace('/login');
     }
   }, [isError, router, pathname]);
 

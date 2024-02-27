@@ -7,6 +7,7 @@ import Image from 'next/image';
 import useAlert from '@/recoil/alert/useAlert';
 import { TSellForm } from '@/types/sellFormType';
 import { generateInitialSellForm } from '@/constants/generateInitialSellForm';
+import Tips from './tips';
 
 export default function SelectPhoto({
   toPrev,
@@ -80,7 +81,7 @@ export default function SelectPhoto({
     <>
       <TopNavbar left={<PrevBtn onClick={handleToPrev} />} autoOpaque title='옷 선택하기' />
       {!selectedClothImg ? (
-        <BeforeSelectPhoto selectPhoto={selectPhoto} />
+        <Tips selectPhoto={selectPhoto} />
       ) : (
         <AfterSelectPhoto selectedClothImg={selectedClothImg} selectPhoto={selectPhoto} toNext={toNext} />
       )}
@@ -89,19 +90,11 @@ export default function SelectPhoto({
   );
 }
 
-function BeforeSelectPhoto({ selectPhoto }: { selectPhoto: () => void }) {
-  return (
-    <main className='flex flex-col items-center justify-center h-[calc(100vh-64px)] relative'>
-      <div className='px-40'>Reclos에서는 피팅 모델을 생성할 수 있어요. 옷을 앞 뒤로 찍어봐요 ..... 어쩌고 저쩌고</div>
-      <button
-        onClick={selectPhoto}
-        className='fixed left-20 bottom-10 w-[calc(100vw-40px)] text-16 bg-indigo-600 flex justify-center items-center py-12 px-20 box-border text-white rounded-8'
-      >
-        생성하기
-      </button>
-    </main>
-  );
-}
+// function BeforeSelectPhoto({ selectPhoto }: { selectPhoto: () => void }) {
+//   return (
+//     <Tips selectPhoto={selectPhoto} />
+//   );
+// }
 
 function AfterSelectPhoto({
   selectedClothImg,
