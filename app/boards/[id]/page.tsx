@@ -74,7 +74,7 @@ async function Board({ id }: { id: number }) {
             <span className='text-12 text-blue-600 font-medium'>300L</span>
           </div>
           <div className='px-10 py-2 border-1 border-solid border-green-600 rounded-4 flex justify-center items-center gap-5'>
-            <CO2Icon />
+            <CO2Icon width='25' height='15' />
             <span className='text-12 text-green-600 font-medium'>1kg</span>
           </div>
         </section>

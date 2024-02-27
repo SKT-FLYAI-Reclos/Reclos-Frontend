@@ -47,10 +47,9 @@ export default function SellPage() {
     setPage(2);
 
     // 이미 생성된 피팅 모델이 있다면 다시 생성하지 않음
-    if (sellForm.fittingModel.status === 'generated' || sellForm.fittingModel.status === 'selected') {
-      return;
+    if (sellForm.fittingModel.status === 'beforeGenerated') {
+      fetchGenFittingModel();
     }
-    fetchGenFittingModel();
   }
 
   function fetchGenFittingModel() {

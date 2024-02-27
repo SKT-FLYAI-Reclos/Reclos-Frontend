@@ -152,7 +152,7 @@ export default function Write({
           <div className='shrink-0 basis-100 w-100'>
             <span className='text-16 font-medium text-black block mb-10'>상품 사진</span>
             <div className='w-80 h-80 bg-indigo-50 rounded-8 flex justify-center items-center'>
-              <div className='relative w-63 h-63 rounded-8 border-1 border-solid border-indigo-200 overflow-hidden'>
+              <div className='relative w-80 h-80 rounded-8 overflow-hidden'>
                 <Image src={sellForm.correctedCloth.image!} alt='상품 사진' objectFit='contain' fill />
               </div>
             </div>
@@ -180,13 +180,18 @@ export default function Write({
         <TextareaAutosize
           ref={descriptionRef}
           minRows={4}
-          placeholder='자세한 설명을 입력해주세요.&#10;ex) 산지 얼마 안되었는데 사이즈가 잘 맞지 않네요.'
+          placeholder='자세한 설명을 입력해주세요. ex) 스탠다드하면서 간결한 핏의 니트입니다.
+          편안하고 부드러운 착용감으로 데일리룩으로 활용하기 좋습니다.
+          여유로운 실루엣과 기본 베이지 컬러로 어떤 하의와도 잘 어울립니다.
+          사이즈가 맞지 않아서 중고로 내놓게 되었습니다.
+          1번밖에 입지 않은 새 옷 같은 상품입니다.'
           className='bg-indigo-50 rounded-8 text-14 text-gray-400 w-full p-10 outline-1 outline-solid outline-indigo-400 resize-none'
         />
 
         <button
           onClick={handleSubmit}
-          className='fixed bottom-10 left-20 w-[calc(100vw-40px)] bg-indigo-600 rounded-8 text-16 text-white py-10 flex justify-center items-center'
+          disabled={sellForm.fittingModel.selectedIdx.length === 0}
+          className='fixed bottom-10 left-20 w-[calc(100vw-40px)] bg-indigo-600 rounded-8 text-16 text-white py-10 flex justify-center items-center disabled:opacity-50'
         >
           작성 완료
         </button>

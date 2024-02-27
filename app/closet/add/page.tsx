@@ -54,7 +54,13 @@ export default function AddClothPage() {
           // alert('옷 추가에 성공했습니다.');
           showAlert({
             alertViewTitle: '옷 추가에 성공했습니다.',
-            alertActions: [{ title: '확인', style: 'primary', handler: () => router.replace('/closet') }],
+            alertActions: [
+              {
+                title: '확인',
+                style: 'primary',
+                handler: () => location.replace('/closet'), // 추가된 옷 사진을 바로 보여주기 위해 location.replace 사용
+              },
+            ],
           });
           // router.replace('/closet');
         },

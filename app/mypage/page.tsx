@@ -9,6 +9,7 @@ import LevelChart from '@/components/pages/mypage/levelChart';
 import TreeIcon from '@/components/icons/treeIcon';
 import CreditGauge from '@/components/creditGauge';
 import SettingIcon from '@/components/icons/settingIcon';
+import CO2Icon from '@/components/icons/co2Icon';
 
 export default function MyPage() {
   return (
@@ -22,7 +23,7 @@ export default function MyPage() {
           <div className='flex items-center gap-10'>
             <ProfileFillIcon width='50' height='50' />
             <div>
-              <span className='block mb-2 text-16 font-medium'>홍범순</span>
+              <span className='block mb-2 text-16 font-medium'>보라매</span>
               <span className=' text-gray-400 text-12'>기본 정보 보기</span>
             </div>
           </div>
@@ -31,22 +32,22 @@ export default function MyPage() {
         {/* 신뢰 레벨 */}
         <div className='flex items-center gap-5'>
           <span>신뢰 레벨</span>
-          <div className='bg-indigo-600 text-white py-4 px-10 rounded-full text-12'>Lv.0</div>
+          <div className='bg-indigo-600 text-white py-4 px-10 rounded-full text-12'>Lv.1</div>
         </div>
         <div className='flex justify-end mb-10'>
-          <span className='text-12 text-gray-400'>Lv.1 승급까지 - 60</span>
+          <span className='text-12 text-gray-400'>Lv.2 승급까지 - 60</span>
         </div>
         <CreditGauge className='w-full h-20 mb-20' />
         <div className='flex items-center justify-between'>
           {/* 물 레벨 */}
           <div className=''>
             <WaterDropIcon width='20' height='27' />
-            <LevelChart level={5} score={70} color='#2563EB' className='w-150 h-150' />
+            <LevelChart level={3} score={70} color='#2563EB' className='w-150 h-150' />
           </div>
           {/* 나무 레벨 */}
           <div>
-            <TreeIcon />
-            <LevelChart level={3} score={20} color='#16A34A' className='w-150 h-150' />
+            <CO2Icon width='35' height='23' />
+            <LevelChart level={1} score={20} color='#16A34A' className='w-150 h-150' />
           </div>
         </div>
 
