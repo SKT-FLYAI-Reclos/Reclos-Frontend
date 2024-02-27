@@ -83,7 +83,7 @@ export default function SellPage() {
         />
       )}
       {page === 2 && <Write sellForm={sellForm} setSellForm={setSellForm} toPrev={handleToPrev} />}
-      {sellForm.correctedCloth.status === 'loading' && <LoadingWithBackdrop title='보정된 옷 생성 중...' />}
+      {sellForm.correctedCloth.status === 'loading' && <LoadingWithBackdrop title='AI가 배경을 지우는 중..' />}
     </AppLayout>
   );
 }

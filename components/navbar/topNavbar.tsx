@@ -17,7 +17,7 @@ export default function TopNavbar({
     <nav
       className={cls(
         'fixed z-topnav h-64 w-full flex justify-center items-center',
-        showBorder ? 'border-b-1 border-solid border-b-gray-light' : '',
+        showBorder && !autoOpaque ? 'border-b-1 border-solid border-b-gray-light' : '',
         autoOpaque ? 'bg-none' : 'bg-white'
       )}
     >

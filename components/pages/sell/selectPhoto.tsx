@@ -78,7 +78,7 @@ export default function SelectPhoto({
   }
   return (
     <>
-      <TopNavbar left={<PrevBtn onClick={handleToPrev} />} title='옷 선택하기' />
+      <TopNavbar left={<PrevBtn onClick={handleToPrev} />} autoOpaque title='옷 선택하기' />
       {!selectedClothImg ? (
         <BeforeSelectPhoto selectPhoto={selectPhoto} />
       ) : (
@@ -113,9 +113,9 @@ function AfterSelectPhoto({
   toNext: (img: File) => void;
 }) {
   return (
-    <main className='flex flex-col items-center h-[calc(100vh-64px)]'>
+    <main className='flex flex-col items-center h-[calc(100vh-64px)] pt-64'>
       <div className='overflow-hidden w-screen h-[100vw] relative shrink-0'>
-        <Image src={URL.createObjectURL(selectedClothImg)} alt='선택한 옷 이미지' fill objectFit='cover' />
+        <Image src={URL.createObjectURL(selectedClothImg)} alt='선택한 옷 이미지' fill objectFit='contain' />
       </div>
       <div className='fixed bottom-10 left-20 w-[calc(100vw-40px)] flex flex-col gap-10'>
         <button
