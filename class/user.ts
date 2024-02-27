@@ -10,11 +10,11 @@ class User {
 
     // 임시 토큰
     this._accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExMTgzODI3LCJpYXQiOjE3MDg1OTE4MjcsImp0aSI6IjZlZjU5YmFjOTRmYTQ0ODVhM2YwMzEwODA4ZTJjNTBmIiwidXNlcl9pZCI6N30.4t3VLtAScG5UVKOM1gt9UMVTPzajQn07PtYcdYj3h3c';
+      'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExNjEwOTkyLCJpYXQiOjE3MDkwMTg5OTIsImp0aSI6IjgyNWQwNmM4Njk1NTQ5YjI5NjBjNTBlN2JlNDg2MTYzIiwidXNlcl9pZCI6MX0.TSv9x_WdOsdJ4satf3CwK8btN8CLjXHpObu8GYCRrcE';
     this._refreshToken = null;
     // this.id = null;
-    this.id = 7;
-    this.username = '박지수';
+    this.id = 1;
+    this.username = 'DummyUser1';
   }
 
   getAccessToken() {
