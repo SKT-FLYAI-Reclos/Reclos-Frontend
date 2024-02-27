@@ -11,20 +11,32 @@ export default function uploadSellForm(sellForm: TSellForm) {
   formData.append('content', sellForm.description as string);
   formData.append('price', String(sellForm.price));
 
-  for (const img of sellForm.originalClothImgs as File[]) {
+  sellForm.originalClothImgs?.forEach((img) => {
     formData.append('image', img);
     formData.append('kind', 'original');
-  }
+  });
+
+  // for (const img of sellForm.originalClothImgs as File[]) {
+  //   formData.append('image', img);
+  //   formData.append('kind', 'original');
+  // }
 
   formData.append('image', sellForm.correctedCloth.image as string);
   formData.append('kind', 'corrected');
 
   formData.append('category', 'upper_body');
 
-  for (const img of sellForm.fittingModel.images.filter((_, i) => sellForm.fittingModel.selectedIdx.includes(i))) {
-    formData.append('image', img);
-    formData.append('kind', 'fitting');
-  }
+  sellForm.fittingModel.images.forEach((img, i) => {
+    if (sellForm.fittingModel.selectedIdx.includes(i)) {
+      formData.append('image', img);
+      formData.append('kind', 'fitting');
+    }
+  });
+
+  // for (const img of sellForm.fittingModel.images.filter((_, i) => sellForm.fittingModel.selectedIdx.includes(i))) {
+  //   formData.append('image', img);
+  //   formData.append('kind', 'fitting');
+  // }
 
   return appAxios.post('/api/board/', formData, {
     headers: {

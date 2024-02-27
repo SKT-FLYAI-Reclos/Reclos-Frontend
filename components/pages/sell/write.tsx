@@ -46,8 +46,6 @@ export default function Write({
     const selectedFittingModels = sellForm.fittingModel.images.filter((_, i) =>
       sellForm.fittingModel.selectedIdx.includes(i)
     );
-    const selectedOriginalImgs = sellForm.originalClothImgs as File[];
-    const correctedCloth = sellForm.correctedCloth.image as string;
     const title = titleRef.current?.value?.trim();
     const price = priceRef.current?.value?.trim();
     const description = descriptionRef.current?.value?.trim();
