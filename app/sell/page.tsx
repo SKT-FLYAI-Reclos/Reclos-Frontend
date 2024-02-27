@@ -9,11 +9,14 @@ import Write from '@/components/pages/sell/write';
 import GetInfoCorrectedImgPage from '@/components/pages/sell/GetInfoCorrectedImg';
 import { generateInitialSellForm } from '@/constants/generateInitialSellForm';
 import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
+import { useMutation } from '@tanstack/react-query';
+import removeBgApi from '@/apis/removeBgApi';
 
 export default function SellPage() {
   const router = useRouter();
   const [page, setPage] = useState(0);
   const [sellForm, setSellForm] = useState<TSellForm>(generateInitialSellForm());
+  const rmbgMutation = useMutation({ mutationFn: removeBgApi });
   function handleToPrev() {
     if (page === 0) {
       router.back();
@@ -27,13 +30,15 @@ export default function SellPage() {
     // FIXME: 보정된 옷 사진 생성 api 호출 후 이미지 url 받아오기
     setSellForm((prev) => ({ ...prev, correctedCloth: { ...prev.correctedCloth, status: 'loading' } }));
     const tempImg = 'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg';
-    setTimeout(() => {
-      setSellForm((prev) => ({
-        ...prev,
-        correctedCloth: { ...prev.correctedCloth, image: tempImg, status: 'generated' },
-      }));
-      setPage(1);
-    }, 2000);
+    rmbgMutation.mutate(img, {
+      onSuccess: ({ data: res }) => {
+        setSellForm((prev) => ({
+          ...prev,
+          correctedCloth: { ...prev.correctedCloth, image: res.image, uuid: res.id, status: 'generated' },
+        }));
+        setPage(1);
+      },
+    });
   }
 
   function handleNext1To2() {
