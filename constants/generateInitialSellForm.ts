@@ -9,6 +9,7 @@ export function generateInitialSellForm(): TSellForm {
     description: null,
     correctedCloth: {
       image: null, // 보정된 옷 사진
+      uuid: null,
       status: 'beforeGenerated',
     },
     originalClothImgs: null, // 원본 옷 사진

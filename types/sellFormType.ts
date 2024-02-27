@@ -15,6 +15,7 @@ export type TSellForm = {
   price: number | null;
   correctedCloth: {
     image: string | null;
+    uuid: string | null;
     status: TGenerateStatus;
   }; // 보정된 옷 이미지 url
   originalClothImgs: File[] | null; // 원본 옷 이미지 url
