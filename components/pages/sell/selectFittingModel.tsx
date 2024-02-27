@@ -56,16 +56,9 @@ export default function SelectFittingModelWrapper({
             {selectedImages.map((img, i) => (
               <div
                 key={i}
-                className='w-60 h-60 relative flex justify-center items-center border-1 border-solid border-indigo-200 rounded-8 bg-white select-none'
+                className='w-60 h-60 relative flex justify-center items-center border-1 border-solid border-indigo-200 rounded-8 bg-white select-none overflow-hidden'
               >
-                <Image
-                  src={img}
-                  alt='선택된 피팅 모델 사진'
-                  width={0}
-                  height={0}
-                  objectFit='contain'
-                  className='w-full h-full rounded-8'
-                />
+                <Image src={img} alt='선택된 피팅 모델 사진' fill objectFit='contain' />
               </div>
             ))}
           </div>
@@ -115,22 +108,15 @@ function SelectFittingModel({
     <div className='fixed left-0 top-0 z-backdrop w-screen min-h-screen bg-white'>
       <TopNavbar title='피팅 모델 선택하기' />
       {!isLastPage && (
-        <div className='w-full h-full pt-64'>
-          <Image
-            src={currentImg}
-            alt='생성된 피팅 모델 사진'
-            width={0}
-            height={0}
-            // fill
-            objectFit='contain'
-            className='w-full h-400'
-          />
-
+        <div className='w-full h-400 pt-64'>
+          <div className='w-full h-400 relative'>
+            <Image src={currentImg} alt='생성된 피팅 모델 사진' fill objectFit='contain' />
+          </div>
           <div className='flex justify-center items-center gap-5 pt-10 relative'>
             {Array.from({ length: sellForm.fittingModel.images.length }).map((_, i) => (
               <div
                 key={i}
-                className={cls('w-10 h-10 rounded-full', i === page ? 'bg-indigo-600' : 'bg-gray-300')}
+                className={cls('w-10 h-10 rounded-full', i === page ? 'bg-indigo-600' : 'bg-indigo-300')}
               ></div>
             ))}
             <button
@@ -192,15 +178,11 @@ function FinishSelectFittingModel({ selectedImages, onClose }: { selectedImages:
         }}
       >
         {selectedImages.map((img, i) => (
-          <div key={i}>
-            <Image
-              src={img}
-              alt='선택된 피팅 모델 사진'
-              width={0}
-              height={0}
-              objectFit='contain'
-              className='w-150 h-150'
-            />
+          <div
+            key={i}
+            className='w-[calc((100vw-20px-20px)/2)] h-[calc((100vw-20px-20px)/2)] relative rounded-8 overflow-hidden'
+          >
+            <Image src={img} alt='선택된 피팅 모델 사진' fill objectFit='contain' />
           </div>
         ))}
       </div>

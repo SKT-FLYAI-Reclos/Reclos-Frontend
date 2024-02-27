@@ -2,7 +2,7 @@ import { TSellForm } from '@/types/sellFormType';
 
 export function generateInitialSellForm(): TSellForm {
   return {
-    sex: 'male',
+    gender: 'male',
     size: 's',
     title: null,
     price: null,

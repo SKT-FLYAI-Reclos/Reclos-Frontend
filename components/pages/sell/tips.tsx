@@ -8,8 +8,7 @@ export default function Tips({ selectPhoto }: { selectPhoto: () => void }) {
   const [page, setPage] = useState(0);
 
   function handleClickNext() {
-    if (page === 3) return;
-    if (page === 2) {
+    if (page >= 2) {
       setPage(page + 1);
       selectPhoto();
     } else {
@@ -47,7 +46,7 @@ function Tip0() {
     <>
       <section className='w-full py-20 px-20 bg-gray-light flex flex-col gap-20 rounded-8 mb-20 text-18 font-medium'>
         <span>Reclos에서는 옷 사진 하나로 다양한 피팅 모델을 생성할 수 있어요.</span>
-        <span>옷을 가지런히 정돈한 후 사진을 찍으면 에이클로젯 AI가 자동으로 배경을 깔끔하게 지워줄 거에요.</span>
+        <span>옷을 가지런히 정돈한 후 사진을 찍으면 Reclos AI가 자동으로 배경을 깔끔하게 지워줄 거에요.</span>
       </section>
 
       <section className='w-full py-20 px-20 bg-indigo-50 flex flex-col gap-20 rounded-8 font-medium'>
@@ -89,7 +88,7 @@ function Tip2() {
       <section className='p-20 w-full mb-20 rounded-8 bg-red-100 flex flex-col gap-10'>
         <span className='text-18 font-medium text-red-600'>안좋은 예시</span>
         <div className='flex items-center gap-10'>
-          {['평평한 바닥', '팔 부분', '각도'].map((text) => (
+          {['평평한 바닥', '팔 부분', '각도', '옷걸이'].map((text) => (
             <div key={text} className='flex items-center gap-5'>
               <span className='block mt-3 text-gray-600 text-16'>{text}</span>
               <XIcon width='10' heigit='10' color='#DC2626' stroke-width='5' />

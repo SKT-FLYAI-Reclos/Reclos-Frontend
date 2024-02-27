@@ -11,12 +11,14 @@ import { generateInitialSellForm } from '@/constants/generateInitialSellForm';
 import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
 import { useMutation } from '@tanstack/react-query';
 import removeBgApi from '@/apis/removeBgApi';
+import genFittingmodel from '@/apis/genFittingmodelApi';
 
 export default function SellPage() {
   const router = useRouter();
   const [page, setPage] = useState(0);
   const [sellForm, setSellForm] = useState<TSellForm>(generateInitialSellForm());
   const rmbgMutation = useMutation({ mutationFn: removeBgApi });
+  const genFittingmodelMutation = useMutation({ mutationFn: genFittingmodel });
   function handleToPrev() {
     if (page === 0) {
       router.back();
@@ -48,23 +50,32 @@ export default function SellPage() {
     //   return;
     // }
     // 임시로 피팅 모델 이미지 생성
+    setPage(2);
     setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'loading' } }));
     const tempImgs = [
       'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
       'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
       'https://reclosbucket.s3.ap-northeast-2.amazonaws.com/src/ex3.jpg',
     ];
-    setTimeout(() => {
-      setSellForm((prev) => ({
-        ...prev,
-        fittingModel: { ...prev.fittingModel, images: tempImgs, status: 'generated' },
-      }));
-    }, 2000);
 
     // TODO: 피팅 모델 생성 api 호출
-
-    setPage(2);
+    genFittingmodelMutation.mutate(sellForm.correctedCloth.uuid as string, {
+      onSuccess: ({ data: res }) => {
+        const images = res.map((item) => item.image);
+        setSellForm((prev) => ({
+          ...prev,
+          fittingModel: { ...prev.fittingModel, images, status: 'generated' },
+        }));
+      },
+      onError: () => {
+        setSellForm((prev) => ({
+          ...prev,
+          fittingModel: { ...prev.fittingModel, status: 'error' },
+        }));
+      },
+    });
   }
+
   return (
     <AppLayout showBNB={false}>
       {page === 0 && (

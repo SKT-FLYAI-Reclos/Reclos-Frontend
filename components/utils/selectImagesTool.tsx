@@ -137,20 +137,12 @@ export default function SelectImagesTool({
             style={{ height: `` }}
             // style={{ height: '100vw' }}
             className={cls(
-              `relative shrink-0 w-65 h-65 flex justify-center items-center border-1 border-solid border-indigo-200 rounded-8 bg-white select-none`,
+              `relative shrink-0 w-65 h-65 flex justify-center items-center border-1 border-solid border-indigo-200 rounded-8 bg-white select-none overflow-hidden`,
               //   `h-calc((100vh-40px-20px)/${maxCol}px-(10px*${maxCol - 1}px))`
               mode === 'delete' && i < fixedImgCount ? 'opacity-30' : ''
             )}
           >
-            <Image
-              src={URL.createObjectURL(img)}
-              alt='선택한 옷 이미지'
-              width={0}
-              height={0}
-              fill
-              objectFit='contain'
-              className='w-full h-full'
-            />
+            <Image src={URL.createObjectURL(img)} alt='선택한 옷 이미지' fill objectFit='contain' />
             {mode === 'delete' && i >= fixedImgCount && (
               <button
                 onClick={() => handleDeleteImg(i)}

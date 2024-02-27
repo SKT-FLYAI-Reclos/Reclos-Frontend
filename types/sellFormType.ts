@@ -1,4 +1,4 @@
-export type TSex = 'both' | 'male' | 'female';
+export type TGender = 'both' | 'male' | 'female';
 export type TSize = 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
 export type TGenerateStatus = 'beforeGenerated' | 'loading' | 'generated' | 'error';
 export type TFittingModel = {
@@ -8,7 +8,7 @@ export type TFittingModel = {
 };
 
 export type TSellForm = {
-  sex: TSex;
+  gender: TGender;
   size: TSize;
   title: string | null;
   description: string | null;
