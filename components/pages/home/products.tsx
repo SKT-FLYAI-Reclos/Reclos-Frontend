@@ -1,7 +1,7 @@
 import HeartIcon from '@/components/icons/heartIcon';
 import { defaultUrl } from '@/constants/defaultUrl';
 import { getDateDiff } from '@/libs/getDateDiff';
-import TClothImage from '@/types/clothImageType';
+import TClothImage, { TClothKind } from '@/types/clothImageType';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -31,10 +31,15 @@ type TProduct = {
 
 export default async function Products() {
   const products: TProduct[] = await fetch(defaultUrl + 'api/board', { cache: 'no-store' }).then((res) => res.json());
+  const onlyFittingProducts = products.map((product) => ({
+    ...product,
+    images: product.images.filter((img) => img.kind === 'fitting'),
+  }));
+
   return (
     <main className=' h-full'>
       <div className='flex flex-wrap justify-between items-center gap-15 px-10'>
-        {products.map((product) => (
+        {onlyFittingProducts.map((product) => (
           <Link href={`/boards/${product.id}`} key={product.id} className='mb-20'>
             <div className='relative w-[calc(100vw/2-10px-10px)] h-220 flex justify-center mb-10 rounded-4 overflow-hidden'>
               <Image

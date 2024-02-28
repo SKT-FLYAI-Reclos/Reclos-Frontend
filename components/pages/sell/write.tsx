@@ -14,6 +14,8 @@ import PhotoAddIcon from '../../../public/icons/photo--add.svg';
 import { useMutation } from '@tanstack/react-query';
 import uploadSellForm from '@/apis/uploadSellForm';
 import { useRouter } from 'next/navigation';
+import useAlert from '@/recoil/alert/useAlert';
+import LoadingWithBackdrop from '@/components/loading/loadingWithBackdrop';
 
 const MAX_ORIGINAL_IMG_COUNT = 5; // 원본 옷 사진 최대 개수
 
@@ -41,6 +43,7 @@ export default function Write({
 
   const uploadSellFormMutation = useMutation({ mutationFn: uploadSellForm });
   const router = useRouter();
+  const { showAlert } = useAlert();
 
   function handleSubmit() {
     const selectedFittingModels = sellForm.fittingModel.images.filter((_, i) =>
@@ -86,15 +89,27 @@ export default function Write({
     };
 
     uploadSellFormMutation.mutate(form, {
-      onSuccess: (res) => {
-        console.log(res);
-        alert('판매글이 성공적으로 작성되었습니다.');
-        // router.push('/');
+      onSuccess: ({ data: { id } }) => {
+        console.log(id);
+        showAlert({
+          alertViewTitle: '게시글이 성공적으로 업로드되었습니다.',
+          alertActions: [
+            {
+              title: '확인',
+              style: 'primary',
+              handler: () => router.push(`/boards/${id}`),
+            },
+          ],
+        });
+      },
+      onError: (err) => {
+        alert(err);
       },
     });
   }
   return (
     <>
+      {uploadSellFormMutation.isPending && <LoadingWithBackdrop title='게시글 업로드 중..' />}
       <TopNavbar left={<PrevBtn onClick={toPrev} />} title='판매글 작성하기' showBorder={false} />
       <main className='h-[calc(100vh-64px)] pt-84 px-10 overflow-y-scroll'>
         <SelectFittingModel retryGenFittingModel={retryGenFittingModel} sellForm={sellForm} setSellForm={setSellForm} />
@@ -160,22 +175,28 @@ export default function Write({
         {/* 제목 */}
         <h4 className='text-16 text-black font-medium mb-5'>제목</h4>
         <input
+          autoComplete='off'
+          spellCheck={false}
           ref={titleRef}
           type='text'
           placeholder='제목을 입력해주세요.'
-          className='mb-20 bg-indigo-50 rounded-8 text-14 text-gray-400 w-full p-10 outline-1 outline-solid outline-indigo-400'
+          className='mb-20 bg-indigo-50 rounded-8 text-14 text-gray-600 w-full p-10 outline-1 outline-solid outline-indigo-400'
         />
         {/* 가격 */}
         <h4 className='text-16 text-black font-medium mb-5'>가격(원)</h4>
         <input
+          autoComplete='off'
+          spellCheck={false}
           ref={priceRef}
           type='number'
           placeholder='가격을 입력해주세요.'
-          className='mb-20 bg-indigo-50 rounded-8 text-14 text-gray-400 w-full p-10 outline-1 outline-solid outline-indigo-400'
+          className='mb-20 bg-indigo-50 rounded-8 text-14 text-gray-600 w-full p-10 outline-1 outline-solid outline-indigo-400'
         />
         {/* 자세한 설명 */}
         <h4 className='text-16 text-black font-medium mb-5'>자세한 설명</h4>
         <TextareaAutosize
+          autoComplete='off'
+          spellCheck={false}
           ref={descriptionRef}
           minRows={4}
           placeholder='자세한 설명을 입력해주세요. ex) 스탠다드하면서 간결한 핏의 니트입니다.
@@ -183,15 +204,15 @@ export default function Write({
           여유로운 실루엣과 기본 베이지 컬러로 어떤 하의와도 잘 어울립니다.
           사이즈가 맞지 않아서 중고로 내놓게 되었습니다.
           1번밖에 입지 않은 새 옷 같은 상품입니다.'
-          className='bg-indigo-50 rounded-8 text-14 text-gray-400 w-full p-10 outline-1 outline-solid outline-indigo-400 resize-none'
+          className='bg-indigo-50 rounded-8 text-14 text-gray-600 w-full p-10 outline-1 outline-solid outline-indigo-400 resize-none'
         />
 
         <button
           onClick={handleSubmit}
-          disabled={sellForm.fittingModel.selectedIdx.length === 0}
+          disabled={sellForm.fittingModel.selectedIdx.length === 0 || uploadSellFormMutation.isPending}
           className='fixed bottom-10 left-20 w-[calc(100vw-40px)] bg-indigo-600 rounded-8 text-16 text-white py-10 flex justify-center items-center disabled:opacity-50'
         >
-          작성 완료
+          {uploadSellFormMutation.isPending ? '업로드 중...' : '작성 완료'}
         </button>
       </main>
     </>

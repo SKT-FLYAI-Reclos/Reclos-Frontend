@@ -2,6 +2,10 @@ import { TSellForm } from '@/types/sellFormType';
 import appAxios from './appAxios';
 import { user } from '@/class/user';
 
+type TUploadSellFormResponse = {
+  id: number; // 게시글 id
+};
+
 export default function uploadSellForm(sellForm: TSellForm) {
   const formData = new FormData();
 
@@ -16,11 +20,6 @@ export default function uploadSellForm(sellForm: TSellForm) {
     formData.append('kind', 'original');
   });
 
-  // for (const img of sellForm.originalClothImgs as File[]) {
-  //   formData.append('image', img);
-  //   formData.append('kind', 'original');
-  // }
-
   formData.append('image', sellForm.correctedCloth.image as string);
   formData.append('kind', 'corrected');
 
@@ -33,12 +32,7 @@ export default function uploadSellForm(sellForm: TSellForm) {
     }
   });
 
-  // for (const img of sellForm.fittingModel.images.filter((_, i) => sellForm.fittingModel.selectedIdx.includes(i))) {
-  //   formData.append('image', img);
-  //   formData.append('kind', 'fitting');
-  // }
-
-  return appAxios.post('/api/board/', formData, {
+  return appAxios.post<TUploadSellFormResponse>('/api/board/', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
       Authorization: 'Bearer ' + user.getAccessToken(),

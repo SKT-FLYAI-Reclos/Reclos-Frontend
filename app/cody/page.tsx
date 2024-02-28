@@ -1,5 +1,6 @@
 'use client';
 
+import genFittingmodel from '@/apis/genFittingmodelApi';
 import HeartIcon from '@/components/icons/heartIcon';
 import AppLayout from '@/components/layouts/appLayout';
 import PrevBtn from '@/components/navbar/prevBtn';
@@ -8,6 +9,7 @@ import SelectClosetClothes from '@/components/pages/cody/SelectClosetClothes';
 import SelectLikeClothes from '@/components/pages/cody/SelectLikeClothes';
 import ModelImgsBanner from '@/components/pages/cody/modelImgsBanner';
 import cls from '@/libs/cls';
+import { useMutation } from '@tanstack/react-query';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
 
@@ -28,6 +30,34 @@ function Cody() {
   const [currentModelImgIdx, setCurrentModelImgIdx] = useState(0); // 현재 보여지는 이미지 인덱스
   const [selectedClothImg, setSelectedClothImg] = useState<string>(''); // 유저가 선택한 옷 이미지
   const [mode, setMode] = useState<'like' | 'closet'>('like'); // 좋아요 한 옷들 / 내 옷장 옷들
+
+  const changeFittingModelMutation = useMutation({ mutationFn: genFittingmodel });
+
+  function handleGenFittingModel(clothUuid: string) {
+    changeFittingModelMutation.mutate(
+      { uuid: '', reference_count: 1 },
+      {
+        onSuccess: ({ data }) => {
+          const newModelImgs = [...modelImgs];
+          // newModelImgs[currentModelImgIdx] = data.image;
+          setModelImgs(newModelImgs);
+        },
+        onError: alert,
+      }
+    );
+  }
+
+  // 하나의 피팅 모델에서 옷 초기화
+  function handleResetModelImg() {
+    const newModelImgs = [...modelImgs];
+    newModelImgs[currentModelImgIdx] = originModelImgs[currentModelImgIdx];
+    setModelImgs(newModelImgs);
+  }
+
+  // 전체 피팅 모델 이미지 초기화
+  function handleResetAllModelImgs() {
+    setModelImgs(originModelImgs);
+  }
 
   return (
     <AppLayout tnb={<TopNavbar left={<PrevBtn />} title='코디 실험실' />} showBNB={false}>
@@ -65,7 +95,13 @@ function Cody() {
       {mode === 'like' ? (
         <SelectLikeClothes />
       ) : (
-        <SelectClosetClothes selectedClothImg={selectedClothImg} setSelectedClothImg={setSelectedClothImg} />
+        <SelectClosetClothes
+          handleGenFittingModel={handleGenFittingModel}
+          handleResetModelImg={handleResetModelImg}
+          handleResetAllModelImgs={handleResetAllModelImgs}
+          selectedClothImg={selectedClothImg}
+          setSelectedClothImg={setSelectedClothImg}
+        />
       )}
     </AppLayout>
   );

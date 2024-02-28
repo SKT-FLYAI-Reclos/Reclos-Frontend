@@ -6,9 +6,15 @@ import Image from 'next/image';
 export default function SelectClosetClothes({
   selectedClothImg,
   setSelectedClothImg,
+  handleGenFittingModel,
+  handleResetModelImg,
+  handleResetAllModelImgs,
 }: {
   selectedClothImg: string;
   setSelectedClothImg: (img: string) => void;
+  handleGenFittingModel: (clothUuid: string) => void;
+  handleResetModelImg: () => void;
+  handleResetAllModelImgs: () => void;
 }) {
   const { clothes, isLoading } = useCloset(user.id);
   function handleClickCloth(cloth: string) {

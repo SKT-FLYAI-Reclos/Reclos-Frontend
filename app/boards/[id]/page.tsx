@@ -38,7 +38,8 @@ async function Board({ id }: { id: number }) {
           {/* 프로필 / 이름 */}
           <div className='flex items-center gap-10'>
             <ProfileFillIcon width='50' height='50' />
-            <span className='font-medium text-16'>{board.author.username}</span>
+            {/* <span className='font-medium text-16'>{board.author.username}</span> */}
+            <span className='font-medium text-16'>보라매</span>
           </div>
           {/* 신뢰 레벨 */}
           <div className='flex flex-col gap-2 w-70'>
@@ -55,7 +56,11 @@ async function Board({ id }: { id: number }) {
         </section>
 
         {/* 카테고리/작성일 */}
-        <span className='block mb-10 text-14 font-normal'>{`${board.category} · ${getDateDiff(
+        {/* <span className='block mb-10 text-14 font-normal'>{`${board.category} · ${getDateDiff(
+          new Date(),
+          board.created_at
+        )}전`}</span> */}
+        <span className='block mb-10 text-14 font-normal'>{`상의 · ${getDateDiff(
           new Date(),
           board.created_at
         )}전`}</span>

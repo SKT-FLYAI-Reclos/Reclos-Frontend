@@ -55,21 +55,26 @@ export default function SellPage() {
   function fetchGenFittingModel() {
     setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'loading' } }));
 
-    genFittingmodelMutation.mutate(sellForm.correctedCloth.uuid as string, {
-      onSuccess: ({ data: res }) => {
-        const images = res.map((item) => item.image);
-        setSellForm((prev) => ({
-          ...prev,
-          fittingModel: { ...prev.fittingModel, images, status: 'generated' },
-        }));
-      },
-      onError: () => {
-        setSellForm((prev) => ({
-          ...prev,
-          fittingModel: { ...prev.fittingModel, status: 'error' },
-        }));
-      },
-    });
+    genFittingmodelMutation.mutate(
+      { uuid: sellForm.correctedCloth.uuid as string, reference_count: 2 },
+      {
+        onSuccess: ({ data: res }) => {
+          const images = res.map((item) => item.image);
+          setSellForm((prev) => ({
+            ...prev,
+            fittingModel: { ...prev.fittingModel, images, status: 'generated' },
+          }));
+          console.log('res', res);
+        },
+        onError: (err) => {
+          console.log(err);
+          setSellForm((prev) => ({
+            ...prev,
+            fittingModel: { ...prev.fittingModel, status: 'error' },
+          }));
+        },
+      }
+    );
   }
 
   return (

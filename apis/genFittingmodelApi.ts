@@ -9,12 +9,13 @@ type TGenFittingmodelResponse = {
   user: number;
 }[];
 
-export default function genFittingmodel(uuid: string) {
+export default function genFittingmodel({ uuid, reference_count }: { uuid: string; reference_count: number }) {
   return appAxios.post<TGenFittingmodelResponse>(
     'api/imgen/ladivton',
     {
       uuid,
       category: 'upper_body', // 추후에 클러스터링 모델 적용
+      reference_count,
     },
     {
       headers: {
