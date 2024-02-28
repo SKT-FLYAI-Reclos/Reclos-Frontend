@@ -10,9 +10,11 @@ import PrevBtn from '@/components/navbar/prevBtn';
 import TopNavbar from '@/components/navbar/topNavbar';
 import Banner from '@/components/pages/boards/banner';
 import LikeBtn from '@/components/pages/boards/likeBtn';
+import { clothCategoryMapping } from '@/constants/clothCategoryMapping';
 import { defaultUrl } from '@/constants/defaultUrl';
 import { getDateDiff } from '@/libs/getDateDiff';
 import TClothImage from '@/types/clothImageType';
+import { TSize } from '@/types/sellFormType';
 import TUser from '@/types/userType';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -56,11 +58,7 @@ async function Board({ id }: { id: number }) {
         </section>
 
         {/* 카테고리/작성일 */}
-        {/* <span className='block mb-10 text-14 font-normal'>{`${board.category} · ${getDateDiff(
-          new Date(),
-          board.created_at
-        )}전`}</span> */}
-        <span className='block mb-10 text-14 font-normal'>{`상의 · ${getDateDiff(
+        <span className='block mb-10 text-14 font-normal'>{`${clothCategoryMapping[board.category]} · ${getDateDiff(
           new Date(),
           board.created_at
         )}전`}</span>
@@ -69,18 +67,18 @@ async function Board({ id }: { id: number }) {
         {/* size/reward */}
         <section className='flex items-center mb-10'>
           <div className='mr-5 px-12 py-2 text-12 text-indigo-600 font-medium border-1 border-solid border-indigo-600 rounded-4'>
-            여성
+            {board.gender === 'male' ? '남성' : '여성'}
           </div>
           <div className='mr-10 px-12 py-2 text-12 text-indigo-600 font-medium border-1 border-solid border-indigo-600 rounded-4'>
-            M
+            {board.size.toUpperCase()}
           </div>
           <div className='mr-5 px-12 py-2 border-1 border-solid border-blue-600 rounded-4 flex justify-center items-center gap-5'>
             <WaterDropIcon width='10' height='14' />
-            <span className='text-12 text-blue-600 font-medium'>300L</span>
+            <span className='text-12 text-blue-600 font-medium'>{board.esg_water}L</span>
           </div>
           <div className='px-10 py-2 border-1 border-solid border-green-600 rounded-4 flex justify-center items-center gap-5'>
             <CO2Icon width='25' height='15' />
-            <span className='text-12 text-green-600 font-medium'>1kg</span>
+            <span className='text-12 text-green-600 font-medium'>{board.esg_co2}kg</span>
           </div>
         </section>
 
@@ -94,9 +92,7 @@ async function Board({ id }: { id: number }) {
         </section>
 
         {/* 본문 */}
-        <p className='pr-50 mb-50'>
-          스탠다드하면서 간결한 핏의 니트입니다. 편안하고 부드러운 착용감으로 데일리룩으로 활용하기 좋습니다.
-        </p>
+        <p className='pr-50 mb-50'>{board.content}</p>
         {/* Bottom Bar */}
         <section className='fixed bottom-0 left-0 flex items-center justify-between gap-20 w-full h-60 py-10 px-20 bg-white border-t-1 border-solid border-t-gray-light'>
           <LikeBtn
@@ -132,4 +128,8 @@ type TBoard = {
   price: number;
   created_at: string;
   updated_at: string;
+  gender: 'male' | 'female';
+  size: TSize;
+  esg_water: number;
+  esg_co2: number;
 };

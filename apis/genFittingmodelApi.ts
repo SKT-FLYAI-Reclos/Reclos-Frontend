@@ -7,6 +7,7 @@ type TGenFittingmodelResponse = {
   image: string;
   created_at: string;
   user: number;
+  reference_id: string;
 }[];
 
 export default function genFittingmodel({ uuid, reference_count }: { uuid: string; reference_count: number }) {

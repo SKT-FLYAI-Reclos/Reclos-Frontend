@@ -47,6 +47,7 @@ export default function AddClothPage() {
       });
       return;
     }
+
     addClothMutation.mutate(
       { topClothes: selectedTopClothImgs, bottomClothes: selectedBottomClothImgs },
       {

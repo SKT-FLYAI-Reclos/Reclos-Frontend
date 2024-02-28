@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import appAxios from './appAxios';
 import { user } from '@/class/user';
+import { removeBgApiAll } from './removeBgApi';
 
 export default async function postAddClothes({
   topClothes,
@@ -9,8 +10,11 @@ export default async function postAddClothes({
   topClothes: File[];
   bottomClothes: File[];
 }): Promise<AxiosResponse<any, any>[]> {
+  const urls = await removeBgApiAll(topClothes.concat(bottomClothes));
+  console.log('urls', urls);
+
   return await axios.all(
-    Array.from(topClothes)
+    Array.from(urls.slice(0, topClothes.length))
       .map((f) => {
         const formData = new FormData();
         formData.append('image', f);
@@ -20,7 +24,7 @@ export default async function postAddClothes({
         });
       })
       .concat(
-        Array.from(bottomClothes).map((f) => {
+        Array.from(urls.slice(topClothes.length)).map((f) => {
           const formData = new FormData();
           formData.append('image', f);
           formData.append('cloth_type', 'bottom');

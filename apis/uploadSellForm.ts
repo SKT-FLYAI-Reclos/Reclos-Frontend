@@ -18,17 +18,20 @@ export default function uploadSellForm(sellForm: TSellForm) {
   sellForm.originalClothImgs?.forEach((img) => {
     formData.append('image', img);
     formData.append('kind', 'original');
+    formData.append('reference_id', ''); // 빈 문자열 -> None
   });
 
   formData.append('image', sellForm.correctedCloth.image as string);
   formData.append('kind', 'corrected');
+  formData.append('reference_id', '');
 
   formData.append('category', 'upper_body');
 
   sellForm.fittingModel.images.forEach((img, i) => {
     if (sellForm.fittingModel.selectedIdx.includes(i)) {
-      formData.append('image', img);
+      formData.append('image', img.url);
       formData.append('kind', 'fitting');
+      formData.append('reference_id', img.refId);
     }
   });
 

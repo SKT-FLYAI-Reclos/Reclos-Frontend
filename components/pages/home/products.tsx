@@ -40,8 +40,8 @@ export default async function Products() {
     <main className=' h-full'>
       <div className='flex flex-wrap justify-between items-center gap-15 px-10'>
         {onlyFittingProducts.map((product) => (
-          <Link href={`/boards/${product.id}`} key={product.id} className='mb-20'>
-            <div className='relative w-[calc(100vw/2-10px-10px)] h-220 flex justify-center mb-10 rounded-4 overflow-hidden'>
+          <Link href={`/boards/${product.id}`} key={product.id} className='mb-20 w-[calc(100vw/2-10px-10px)]'>
+            <div className='relative h-220 flex justify-center mb-10 rounded-4 overflow-hidden'>
               <Image
                 src={product.images.length ? product.images[0].image : ''}
                 alt={product.title + '에 대한 상품 이미지'}

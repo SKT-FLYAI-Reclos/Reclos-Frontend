@@ -71,7 +71,7 @@ export default function SelectFittingModelWrapper({
                 key={i}
                 className='w-60 h-60 relative flex justify-center items-center border-1 border-solid border-indigo-200 rounded-8 bg-white select-none overflow-hidden'
               >
-                <Image src={img} alt='선택된 피팅 모델 사진' fill objectFit='contain' />
+                <Image src={img.url} alt='선택된 피팅 모델 사진' fill objectFit='contain' />
               </div>
             ))}
           </div>
@@ -79,7 +79,7 @@ export default function SelectFittingModelWrapper({
       </div>
       {showSelectFittingModel && (
         <SelectFittingModel
-          selectedImages={selectedImages}
+          selectedImages={selectedImages.map((img) => img.url)}
           sellForm={sellForm}
           setSellForm={setSellForm}
           onClose={() => setShowSelectFittingModel(false)}
@@ -128,7 +128,7 @@ function SelectFittingModel({
       {!isLastPage && (
         <div className='w-full h-400 pt-64'>
           <div className='w-full h-400 relative'>
-            <Image src={currentImg} alt='생성된 피팅 모델 사진' fill objectFit='contain' />
+            <Image src={currentImg.url} alt='생성된 피팅 모델 사진' fill objectFit='contain' />
           </div>
           <div className='flex justify-center items-center gap-5 pt-10 relative'>
             {Array.from({ length: sellForm.fittingModel.images.length }).map((_, i) => (

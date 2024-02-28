@@ -52,14 +52,14 @@ export default function SellPage() {
     }
   }
 
-  function fetchGenFittingModel() {
+  async function fetchGenFittingModel() {
     setSellForm((prev) => ({ ...prev, fittingModel: { ...prev.fittingModel, status: 'loading' } }));
 
     genFittingmodelMutation.mutate(
-      { uuid: sellForm.correctedCloth.uuid as string, reference_count: 2 },
+      { uuid: sellForm.correctedCloth.uuid as string, reference_count: 1 },
       {
         onSuccess: ({ data: res }) => {
-          const images = res.map((item) => item.image);
+          const images = res.map((item) => ({ url: item.image, refId: item.reference_id }));
           setSellForm((prev) => ({
             ...prev,
             fittingModel: { ...prev.fittingModel, images, status: 'generated' },
