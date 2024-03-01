@@ -25,3 +25,36 @@ export default function genFittingmodel({ uuid, reference_count }: { uuid: strin
     }
   );
 }
+
+type TGenFittingModelOnBoard = {
+  category: 'upper_body' | 'lower_body';
+  created_at: string;
+  id: number;
+  image: string;
+  reference_id: string;
+  uuid: string;
+}[];
+
+export function genFittingModelOnBoard({
+  fittingModelRef,
+  clothImgUrl,
+  category,
+}: {
+  fittingModelRef: string;
+  clothImgUrl: string;
+  category: 'upper_body' | 'lower_body';
+}) {
+  return appAxios.post<TGenFittingModelOnBoard>(
+    'api/imgen/ladivtonbyref',
+    {
+      reference_id: fittingModelRef,
+      image: clothImgUrl,
+      category,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${user.getAccessToken()}`,
+      },
+    }
+  );
+}

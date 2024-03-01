@@ -38,7 +38,7 @@ export default function Banner() {
   return (
     <Slider {...mainBannerSettings} className='mb-20'>
       {slides.map((slide, index) => (
-        <div className='w-full h-400 relative' key={index}>
+        <div className='w-full h-[calc(100vw*0.62)] relative' key={index}>
           <Image
             src={slide.src}
             alt={slide.alt}

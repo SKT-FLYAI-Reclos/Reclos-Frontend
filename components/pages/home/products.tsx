@@ -33,7 +33,7 @@ export default async function Products() {
   const products: TProduct[] = await fetch(defaultUrl + 'api/board', { cache: 'no-store' }).then((res) => res.json());
   const onlyFittingProducts = products.map((product) => ({
     ...product,
-    images: product.images.filter((img) => img.kind === 'fitting'),
+    images: product.images.filter((img) => img.kind === 'ladi_vton'),
   }));
 
   return (
