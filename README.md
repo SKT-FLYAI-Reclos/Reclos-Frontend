@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Reclos - 가상 피팅 AI를 통한 초간편 패션 중고 거래 플랫폼
 
-## Getting Started
+<img src=""/>
 
-First, run the development server:
+## 프로젝트 소개
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+😆 사진 한 장으로 **간편하게** 피팅 사진 만들어 판매하자.<br>
+😁 중고 의류 구매하기 전, 피팅 모델에 내 옷을 **직접** 입혀보자.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Reclos는 중고 의류 거래 플랫폼으로, 판매/구매 과정에서의 불편함을 가상 피팅 AI 기술로 해결하고자 합니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+옷 사진 한 장만으로 피팅 모델을 생성해 판매 과정을 간소화하고, 구매 전 자신의 옷과 미리 코디해 볼 수 있는 기능을 제공합니다.
 
-## Learn More
+<br><br>
 
-To learn more about Next.js, take a look at the following resources:
+## 팀원 👨‍👨‍👧‍👧👩‍👦‍👦
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+|                                                                                            |                                                                                             |                                                                                             |                                                                                             |                                                                                            |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| <img src="https://avatars.githubusercontent.com/u/87124432?v=4" width=130px alt="박지수"/> | <img src="https://avatars.githubusercontent.com/u/116615006?v=4" width=130px alt="차형석"/> | <img src="https://avatars.githubusercontent.com/u/108793893?v=4" width=130px alt="최종휘"/> | <img src="https://avatars.githubusercontent.com/u/139847657?v=4" width=130px alt="한도현"/> | <img src="https://avatars.githubusercontent.com/u/16769822?v=4" width=130px alt="홍범순"/> |
+| [박지수](https://github.com/jisupark123)                                                   | [차형석](https://github.com/chaeyeon-yang)                                                  | [최종휘](https://github.com/chaeyeon-yang)                                                  | [한도현](https://github.com/chaeyeon-yang)                                                  | [홍범순](https://github.com/chaeyeon-yang)                                                 |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<br><br><br>
 
-## Deploy on Vercel
+## 📱 Screenshot
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<br>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+##
