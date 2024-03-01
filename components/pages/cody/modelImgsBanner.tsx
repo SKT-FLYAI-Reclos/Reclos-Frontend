@@ -24,7 +24,7 @@ export default function ModelImgsBanner({
   currentImgIdx,
   setCurrentImgIdx,
 }: {
-  modelImgs: string[];
+  modelImgs: { url: string; refId: string }[];
   currentImgIdx: number;
   setCurrentImgIdx: Dispatch<SetStateAction<number>>;
 }) {
@@ -48,12 +48,12 @@ export default function ModelImgsBanner({
           <Image
             width={0}
             height={0}
-            src={img}
+            src={img.url}
             alt={'피팅 모델 사진'}
             object-fit='contain'
             // priority
             placeholder='blur'
-            blurDataURL={img}
+            blurDataURL={img.url}
             sizes='1040px'
             style={{ width: '100%', height: '400px' }}
           />

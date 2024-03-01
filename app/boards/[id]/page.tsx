@@ -100,7 +100,13 @@ async function Board({ id }: { id: number }) {
             boardId={board.id}
           />
           <Link
-            href={`/cody?images=${board.images.map((img) => img.image).join(',')}&cloth_type=${'top'}`} // TODO: cloth_type api 연결
+            href={`/cody?images=${board.images
+              .filter((img) => img.kind === 'ladi_vton')
+              .map((img) => img.image)
+              .join(',')}&ref_ids=${board.images
+              .filter((img) => img.kind === 'original') // FIXME: 일단 이렇게 진행
+              .map((img) => img.reference_id)
+              .join(',')}&cloth_type=${'top'}`}
             className=' grow py-12 bg-indigo-600 border-2 border-solid border-indigo-600 flex justify-center items-center text-white font-semibold text-16 rounded-8'
           >
             코디 생성하기
